@@ -1,0 +1,22 @@
+{
+   "destination_addresses" : [ "Rome, Italy" ],
+   "origin_addresses" : [ "Madrid, Madrid, Spain" ],
+   "rows" : [
+      {
+         "elements" : [
+            {
+               "distance" : {
+                  "text" : "1,953 km",
+                  "value" : 1952607
+               },
+               "duration" : {
+                  "text" : "18 hours 22 mins",
+                  "value" : 66129
+               },
+               "status" : "OK"
+            }
+         ]
+      }
+   ],
+   "status" : "OK"
+}
