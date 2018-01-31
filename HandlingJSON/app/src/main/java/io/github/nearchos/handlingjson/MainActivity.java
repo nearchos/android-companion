@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +55,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void map(View view) {
-        // todo
+//        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Result result = gson.fromJson(json, Result.class);
+        resultTextView.setText("Distance: " + result.rows[0].elements[0].distance.value + "m");
+        Log.d("android-companion", result.toString());
+        Toast.makeText(this, "json: " + gson.toJson(result), Toast.LENGTH_SHORT).show();
     }
 
     /**

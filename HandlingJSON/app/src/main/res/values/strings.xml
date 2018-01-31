@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HandlingJSON</string>
+    <string name="Parse">Parse</string>
+    <string name="Map">Map</string>
+</resources>
