@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Coffee Lovers</string>
+    <string name="Show_open_orders_only">Show open orders only</string>
+    <string name="Add">Add</string>
+    <string name="Name_or_table">Name or table</string>
+    <string name="Type">Type</string>
+    <string name="Size">Size</string>
+    <string name="Cappuccino">Cappuccino</string>
+    <string name="Latte">Latte</string>
+    <string name="Americano">Americano</string>
+    <string name="Milk">Milk</string>
+    <string name="Caffeine_free">Caffeine free</string>
+    <string name="Quantity">Quantity</string>
+    <string name="Minus">-</string>
+    <string name="Plus">+</string>
+    <string name="Place_order">Place order</string>
+</resources>
