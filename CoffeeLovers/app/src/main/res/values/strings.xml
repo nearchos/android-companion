@@ -2,7 +2,7 @@
     <string name="app_name">Coffee Lovers</string>
     <string name="Show_open_orders_only">Show open orders only</string>
     <string name="Add">Add</string>
-    <string name="Name_or_table">Name or table</string>
+    <string name="Name">Name</string>
     <string name="Type">Type</string>
     <string name="Size">Size</string>
     <string name="Cappuccino">Cappuccino</string>

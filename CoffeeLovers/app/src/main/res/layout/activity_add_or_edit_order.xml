@@ -16,13 +16,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Name_or_table"
+            android:text="@string/Name"
             android:textColor="@color/colorAccent"
             android:textSize="12sp" />
 
         <EditText
             android:id="@+id/activity_add_or_edit_order_name"
-            android:text="Table 1"
+            android:text="Homer Simpson"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -34,6 +34,7 @@
             android:textSize="12sp" />
 
         <RadioGroup
+            android:id="@+id/activity_add_or_edit_order_radio_group"
             android:orientation="horizontal"
             android:padding="12dp"
             android:layout_width="match_parent"
@@ -178,7 +179,7 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/activity_add_or_edit_order_add_to_cart_button"
+            android:id="@+id/place_order_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
