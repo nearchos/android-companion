@@ -1,8 +1,11 @@
 package io.github.nearchos.coffeelovers;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,7 +18,9 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
+import io.github.nearchos.coffeelovers.db.DbOpenHelper;
 import io.github.nearchos.coffeelovers.model.Coffee;
+import io.github.nearchos.coffeelovers.model.Order;
 
 public class AddOrEditOrderActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -60,6 +65,23 @@ public class AddOrEditOrderActivity extends AppCompatActivity implements Adapter
         decreaseQuantityButton.setOnClickListener(view -> updateQuantity(-1));
 
         this.placeOrderButton.setOnClickListener(view -> placeOrder());
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN); // keep the keyboard hidden
+    }
+
+    private int id = 0;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        final Intent intent = getIntent();
+        final Order order = intent == null ? null : (Order) intent.getSerializableExtra("order");
+        if(order != null) {
+            id = order.getId();
+            orderNameEditText.setText(order.getName());
+            // todo set the initial values accordingly
+        }
     }
 
     private Coffee.Type getSelectedType() {
@@ -108,5 +130,10 @@ public class AddOrEditOrderActivity extends AppCompatActivity implements Adapter
         final Coffee.Milk milk = Coffee.Milk.values()[milkSpinner.getSelectedItemPosition()];
 
         final Coffee coffee = new Coffee(type, size, milk, caffeineFree);
+        final Order order = new Order(id, name, coffee, quantity);
+
+        final SQLiteOpenHelper sqLiteOpenHelper = new DbOpenHelper(this);
+        DbOpenHelper.addOrEditOrder(sqLiteOpenHelper.getWritableDatabase(), order);
+        finish();
     }
 }

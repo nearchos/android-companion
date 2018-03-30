@@ -1,10 +1,12 @@
 package io.github.nearchos.coffeelovers.model;
 
+import java.io.Serializable;
+
 /**
  * @author Nearchos
  * Created: 29-Mar-18
  */
-public class Coffee {
+public class Coffee implements Serializable {
 
     public enum Type { CAPPUCCINO, LATTE, AMERICANO };
     public enum Size { SMALL, MEDIUM, LARGE };

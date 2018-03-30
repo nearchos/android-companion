@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddOrEditOrderActivity" />
+        <activity android:name=".TabletFriendlyActivity"></activity>
     </application>
 
 </manifest>
