@@ -6,15 +6,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class TabletFriendlyActivity extends AppCompatActivity {
+import io.github.nearchos.coffeelovers.model.Order;
+
+public class TabletFriendlyActivity extends AppCompatActivity implements OrderSelectionListener {
+
+    private OrderViewFragment orderViewFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tablet_friendly);
+
+        orderViewFragment = (OrderViewFragment) getSupportFragmentManager().findFragmentById(R.id.order_viewer_fragment);
     }
 
-    public void addOrder(final View view) {
-        startActivity(new Intent(this, AddOrEditOrderActivity.class));
+    @Override
+    public void onOrderSelected(Order order) {
+        if(orderViewFragment != null && orderViewFragment.isAdded()) { // dual fragment (tablet mode)
+            // show in fragment
+            orderViewFragment.update(order);
+        } else { // single fragment (phone mode)
+            final Intent intent = new Intent(this, AddOrEditOrderActivity.class);
+            intent.putExtra("order", order);
+            startActivity(intent);
+        }
     }
 }

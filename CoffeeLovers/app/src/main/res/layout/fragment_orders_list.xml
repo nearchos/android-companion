@@ -24,7 +24,8 @@
 
     <ListView
         android:id="@+id/list_view"
-        android:padding="8dp"
+        android:choiceMode="singleChoice"
+        android:listSelector="#FFc0e1"
         android:layout_below="@id/activity_main_divider"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
