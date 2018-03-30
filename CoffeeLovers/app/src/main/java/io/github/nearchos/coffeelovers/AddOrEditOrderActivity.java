@@ -66,9 +66,11 @@ public class AddOrEditOrderActivity extends AppCompatActivity implements Adapter
 
         this.placeOrderButton.setOnClickListener(view -> placeOrder());
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN); // keep the keyboard hidden
+        // keep the keyboard hidden
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
+    // 0 means new entry, otherwise edit existing
     private int id = 0;
 
     @Override

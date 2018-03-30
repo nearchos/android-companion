@@ -115,11 +115,11 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     }
 
     public static void closeOrder(SQLiteDatabase db, final int id) {
-        db.execSQL("UPDATE orders SET status=? WHERE id=?", new Object[] {Order.Status.CLOSED, id});
+        db.execSQL("UPDATE orders SET status=? WHERE id=?", new Object[] {Order.Status.CLOSED.name(), id});
     }
 
     public static void openOrder(SQLiteDatabase db, final int id) {
-        db.execSQL("UPDATE orders SET status=? WHERE id=?", new Object[] {Order.Status.OPEN, id});
+        db.execSQL("UPDATE orders SET status=? WHERE id=?", new Object[] {Order.Status.OPEN.name(), id});
     }
 
     public static double getPrice(SQLiteDatabase db, final Coffee.Type type, Coffee.Size size) {
