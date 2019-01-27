@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
@@ -36,14 +35,26 @@ public class OrdersListFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    private OrderSelectionListener listener = null;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        this.listener = (OrderSelectionListener) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        this.listener = null;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
         updateList(showOpenOrdersOnlyCheckBox.isChecked());
     }
 
@@ -53,10 +64,8 @@ public class OrdersListFragment extends Fragment {
 
         listView.setAdapter(new OrderAdapter(getActivity(), orders));
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            // todo tell the parent activity
-//            final Intent intent = new Intent(this, AddOrEditOrderActivity.class);
-//            intent.putExtra("order", orders.get(position));
-//            startActivity(intent);
+            // tell the parent activity
+            if(listener != null) listener.onOrderSelected(orders.get(position));
         });
     }
 
@@ -70,7 +79,16 @@ public class OrdersListFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_orders_list, container, false);
         this.showOpenOrdersOnlyCheckBox = view.findViewById(R.id.activity_main_open_orders_only_checkbox);
+        this.showOpenOrdersOnlyCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> updateList(isChecked));
         this.listView = view.findViewById(R.id.list_view);
         return view;
     }
+
+    public void addOrder(final View view) {
+        startActivity(new Intent(getActivity(), AddOrEditOrderActivity.class));
+    }
+
+    private int selectedOrderId;
+
+
 }

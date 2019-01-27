@@ -66,9 +66,11 @@ public class AddOrEditOrderActivity extends AppCompatActivity implements Adapter
 
         this.placeOrderButton.setOnClickListener(view -> placeOrder());
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN); // keep the keyboard hidden
+        // keep the keyboard hidden
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
+    // 0 means new entry, otherwise edit existing
     private int id = 0;
 
     @Override
@@ -78,9 +80,32 @@ public class AddOrEditOrderActivity extends AppCompatActivity implements Adapter
         final Intent intent = getIntent();
         final Order order = intent == null ? null : (Order) intent.getSerializableExtra("order");
         if(order != null) {
+            // set the initial values accordingly
             id = order.getId();
             orderNameEditText.setText(order.getName());
-            // todo set the initial values accordingly
+            switch (order.getCoffee().getType()) {
+                case CAPPUCCINO:
+                    cappuccinoRadioButton.setChecked(true);
+                    break;
+                case LATTE:
+                    latteRadioButton.setChecked(true);
+                    break;
+                case AMERICANO:
+                default:
+                    americanoRadioButton.setChecked(true);
+            }
+            final Coffee.Size size = order.getCoffee().getSize();
+            sizeSpinner.setSelection(size.ordinal(), true);
+
+            caffeineFreeCheckBox.setChecked(order.getCoffee().isCaffeineFree());
+
+            final Coffee.Milk milk = order.getCoffee().getMilk();
+            milkSpinner.setSelection(milk.ordinal(), true);
+
+            this.quantity = order.getQuantity();
+            quantityTextView.setText(String.format(Locale.ENGLISH, "%d", quantity));
+
+            updateSummary();
         }
     }
 

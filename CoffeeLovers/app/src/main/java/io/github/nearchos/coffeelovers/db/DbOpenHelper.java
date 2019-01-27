@@ -52,8 +52,6 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
     public static void addOrEditOrder(SQLiteDatabase db, final Order order) {
         final ContentValues contentValues = new ContentValues();
-        // if the id is not zero, then it's an 'edit', otherwise it's an 'add'
-        if(order.getId() != 0) contentValues.put("id", order.getId());
         contentValues.put("name", order.getName());
         contentValues.put("type", order.getCoffee().getType().name());
         contentValues.put("size", order.getCoffee().getSize().name());
@@ -61,7 +59,13 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         contentValues.put("milk", order.getCoffee().getMilk().name());
         contentValues.put("quantity", order.getQuantity());
         contentValues.put("status", order.getStatus().name());
-        db.insert("orders", null, contentValues);
+
+        // if the id is not zero, then it's an 'edit', otherwise it's an 'add'
+        if(order.getId() != 0) { // edit
+            db.update("orders", contentValues, "id=?", new String[] { Integer.toString(order.getId())});
+        } else { // add
+            db.insert("orders", null, contentValues);
+        }
     }
 
     public static void addPrice(SQLiteDatabase db, final Coffee.Type type, Coffee.Size size, final double price) {
@@ -111,11 +115,11 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     }
 
     public static void closeOrder(SQLiteDatabase db, final int id) {
-        db.execSQL("UPDATE orders SET status=? WHERE id=?", new Object[] {Order.Status.CLOSED, id});
+        db.execSQL("UPDATE orders SET status=? WHERE id=?", new Object[] {Order.Status.CLOSED.name(), id});
     }
 
     public static void openOrder(SQLiteDatabase db, final int id) {
-        db.execSQL("UPDATE orders SET status=? WHERE id=?", new Object[] {Order.Status.OPEN, id});
+        db.execSQL("UPDATE orders SET status=? WHERE id=?", new Object[] {Order.Status.OPEN.name(), id});
     }
 
     public static double getPrice(SQLiteDatabase db, final Coffee.Type type, Coffee.Size size) {
