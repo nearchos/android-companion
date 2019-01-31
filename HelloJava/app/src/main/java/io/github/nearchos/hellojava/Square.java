@@ -1,18 +1,17 @@
 package io.github.nearchos.hellojava;
 
-public class Square implements Shape2D {
-
-    private final double side;
+public class Square extends Rectangle {
 
     public Square(final double side) {
-        this.side = side;
+        super(side, side);
     }
 
     public double getSide() {
-        return side;
+        return getWidth();
     }
 
+    @Override
     public double getArea() {
-        return side * side;
+        return Math.pow(getSide(), 2d);
     }
 }

@@ -1,8 +1,19 @@
 package io.github.nearchos.hellojava;
 
-/**
- * @author Nearchos
- * Created: 26-Jan-19
- */
 public class Line extends AbstractShape2D {
+
+    private double length;
+
+    public Line(double length) {
+        this.length = length;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    @Override
+    public double getArea() {
+        return 0d;
+    }
 }
