@@ -1,4 +1,5 @@
-# android-companion
+# Android Mobile Apps
+## A Coding Companion
 
 This page contains resources related to the **Android Companion** book.
 
