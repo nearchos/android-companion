@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PositioningAndMaps</string>
+    <string name="Coordinates">Coordinates</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
