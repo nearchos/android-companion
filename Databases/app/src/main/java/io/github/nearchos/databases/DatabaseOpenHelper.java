@@ -31,8 +31,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_BLOG_ENTRIES =
             "CREATE TABLE entries (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                    "title TEXT NOT NULL, "+
-                    "body TEXT NOT NULL "+
+                    "title TEXT NOT NULL, " +
+                    "body TEXT, " +
+                    "timestamp INTEGER" +
                     ")";
 
     private static final String SQL_DELETE_BLOG_ENTRIES =

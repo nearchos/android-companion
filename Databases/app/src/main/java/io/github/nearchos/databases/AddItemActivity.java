@@ -21,28 +21,28 @@ public class AddItemActivity extends AppCompatActivity {
         bodyEditText = findViewById(R.id.body_edit_text);
     }
 
-    public void discard(View view) {
-        // do not save (i.e. discard) data
-        finish(); // this terminates the activity
+    public void discard(View view) { // do not save data -- i.e. discard it
+        finish(); // stop this activity and return to parent
     }
 
     public void save(View view) {
         final String title = titleEditText.getText().toString();
         final String body = bodyEditText.getText().toString();
 
-        if(title.isEmpty() || body.isEmpty()) {
-            Toast.makeText(this, "Both 'title' and 'body' sections must be non-empty",
+        if(title.isEmpty()) {
+            Toast.makeText(this, "The 'title' must be non-empty",
                     Toast.LENGTH_SHORT).show();
         } else {
             // store in DB
             DatabaseOpenHelper doh = new DatabaseOpenHelper(this);
-            SQLiteDatabase db = doh.getWritableDatabase(); // note we get a writable DB
+            SQLiteDatabase db = doh.getWritableDatabase(); // note we get writable DB
             ContentValues contentValues = new ContentValues(); // a map data structure
             contentValues.put("title", title);
             contentValues.put("body", body);
+            contentValues.put("timestamp", System.currentTimeMillis());
             db.insert("entries", null, contentValues);
 
-            finish(); // causes this activity to terminate, and return to the parent one
+            finish(); // stop this activity and return to parent
         }
     }
 }

@@ -23,22 +23,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        updateList();
-    }
-
-    private void updateList() {
         DatabaseOpenHelper doh = new DatabaseOpenHelper(this); // get helper
         SQLiteDatabase db = doh.getReadableDatabase(); // read-only database instance
         Cursor cursor = db.rawQuery("SELECT * FROM entries", null); // query
         int numOfRows = cursor.getCount(); // number of rows in the result set
+        final int [] ids = new int[numOfRows]; // ids - ignored
         final String [] titles = new String[numOfRows]; // titles
         final String [] bodies = new String[numOfRows]; // bodies - ignored
+        final long [] timestamps = new long[numOfRows]; // timestamps - ignored
         cursor.moveToFirst();
+        int columnIdIndex = cursor.getColumnIndex("id");
         int columnTitleIndex = cursor.getColumnIndex("title");
         int columnBodyIndex = cursor.getColumnIndex("body");
+        int columnTimestampIndex = cursor.getColumnIndex("timestamp");
         for(int i = 0; i < numOfRows; i++) {
+            ids[i] = cursor.getInt(columnIdIndex);
             titles[i] = cursor.getString(columnTitleIndex);
             bodies[i] = cursor.getString(columnBodyIndex);
+            timestamps[i] = cursor.getLong(columnTimestampIndex);
             cursor.moveToNext();
         }
         cursor.close();
