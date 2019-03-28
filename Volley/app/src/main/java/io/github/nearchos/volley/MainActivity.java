@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,47 +33,37 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
     private ListView listView;
-    private Button button;
-
-    // Instantiate the RequestQueue.
-    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        requestQueue = Volley.newRequestQueue(this);
-
         this.textView = findViewById(R.id.textView);
         this.listView = findViewById(R.id.listView);
-        this.button = findViewById(R.id.button);
-        this.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fetchWithGson();
-            }
-        });
     }
 
-    // see https://jsonplaceholder.typicode.com
-    public static final String SERVICE_URL = "https://jsonplaceholder.typicode.com/todos";
-
-    private void fetch() {
-
-        final JsonArrayRequest request = new JsonArrayRequest(
-                Request.Method.GET,
-                SERVICE_URL,
-                null,
-                jsonArrayListener,
-                errorListener);
-
-        requestQueue.add(request);
+    private void updateList(final List<Todo> todos) {
+        textView.setText(new Date().toString());
+        final ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, todos);
+        listView.setAdapter(listAdapter);
     }
 
-    private void fetchWithGson() {
+    public static final String SERVICE_URL =
+            "https://jsonplaceholder.typicode.com/todos";
 
-        final StringRequest request = new StringRequest(
+    public void fetch(View view) {
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+//        final JsonArrayRequest request = new JsonArrayRequest(
+//                Request.Method.GET,
+//                SERVICE_URL,
+//                null, // an optional parameter to be passed with the request
+//                jsonArrayListener,
+//                errorListener);
+
+        final Request request = new StringRequest(
                 Request.Method.GET,
                 SERVICE_URL,
                 stringListener,
@@ -82,46 +72,62 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
 
-    private void updateList(final Vector<Todo> todos) {
-        textView.setText(new Date().toString());
-        final ListAdapter listAdapter = new ArrayAdapter<Todo>(this, android.R.layout.simple_list_item_1, todos);
-        listView.setAdapter(listAdapter);
-    }
-
-    private Response.Listener<JSONArray> jsonArrayListener = new Response.Listener<JSONArray>() {
-        @Override
-        public void onResponse(JSONArray response) {
-            final Vector<Todo> todos = new Vector<>();
-            for(int i = 0; i < response.length(); i++) {
-                try {
-                    final JSONObject jsonObject = response.getJSONObject(i);
-                    Todo todo = new Todo(jsonObject.getInt("userId"),
-                            jsonObject.getInt("id"),
-                            jsonObject.getString("title"),
-                            jsonObject.getBoolean("completed"));
-                    todos.add(todo);
-                } catch (JSONException jsone) {
-                    // todo handle JSON error
-                }
-                updateList(todos);
-            }
-        }
-    };
+//    private void fetchWithGson() {
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//
+//        Request
+//        final StringRequest request = new StringRequest(
+//                Request.Method.GET,
+//                SERVICE_URL,
+//                stringListener,
+//                errorListener);
+//
+//        requestQueue.add(request);
+//    }
 
     private Response.Listener<String> stringListener = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            Gson gson = new Gson();
-            final Todo [] todosArray = gson.fromJson(response, Todo[].class);
-            final Vector<Todo> todos = new Vector<>(Arrays.asList(todosArray));
-            updateList(todos);
+            // use Gson to convert response to array of items
+            final Todo [] todos = new Gson().fromJson(response, Todo[].class);
+            // Arrays.asList(...) is used to convert an array to list
+            List<Todo> todosList = Arrays.asList(todos);
+            updateList(todosList);
         }
     };
+
+//    private Response.Listener<JSONArray> jsonArrayListener = new Response.Listener<JSONArray>() {
+//        @Override
+//        public void onResponse(JSONArray response) {
+//            final Vector<Todo> todos = new Vector<>();
+//            for(int i = 0; i < response.length(); i++) {
+//                try {
+//                    final JSONObject jsonObject = response.getJSONObject(i);
+//                    final Todo todo = new Todo(jsonObject);
+//                    todos.add(todo);
+//                } catch (JSONException jsone) {
+//                    throw new RuntimeException(jsone); // escalate error
+//                }
+//            }
+//            updateList(todos);
+//        }
+//    };
+
+//    private Response.Listener<String> stringListener = new Response.Listener<String>() {
+//        @Override
+//        public void onResponse(String response) {
+//            Gson gson = new Gson();
+//            final Todo [] todosArray = gson.fromJson(response, Todo[].class);
+//            final Vector<Todo> todos = new Vector<>(Arrays.asList(todosArray));
+//            updateList(todos);
+//        }
+//    };
 
     private Response.ErrorListener errorListener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            Log.e(TAG, error.getMessage()); // todo handle error
+            Log.e(TAG, "Volley error: " + error.getMessage());
         }
     };
 }

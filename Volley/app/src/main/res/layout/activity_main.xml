@@ -18,6 +18,7 @@
 
     <Button
         android:id="@+id/button"
+        android:onClick="fetch"
         android:text="Fetch"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -30,6 +31,5 @@
         android:text="Hello World!"
         android:layout_below="@id/textView"
         android:layout_above="@id/button" />
-
 
 </RelativeLayout>

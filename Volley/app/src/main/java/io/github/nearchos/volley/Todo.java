@@ -1,9 +1,8 @@
 package io.github.nearchos.volley;
 
-/**
- * @author Nearchos
- * Created: 18-Mar-19
- */
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Todo {
 
     private int userId;
