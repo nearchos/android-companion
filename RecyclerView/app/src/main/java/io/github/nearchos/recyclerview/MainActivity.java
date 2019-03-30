@@ -1,16 +1,17 @@
-package io.github.nearchos.listsofitems;
+package io.github.nearchos.recyclerview;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.Vector;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NumberAdapter.OnItemClickListener, NumberAdapter.OnItemLongClickListener {
 
     public static final int SIZE_OF_DATA = 100;
     private Vector<Double> data = new Vector<>();
@@ -34,14 +35,38 @@ public class MainActivity extends AppCompatActivity {
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
+        // add divider decoration between items
+        recyclerView.addItemDecoration(new DividerItemDecoration(
+                recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         // use a linear layout manager
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // specify an adapter (see also next example)
-        adapter = new NumberAdapter(data);
+        adapter = new NumberAdapter(data, this, this);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void itemClicked(int pos, double value) {
+        Snackbar.make(recyclerView, data.get(pos) + " (long press to delete)", Snackbar.LENGTH_SHORT)
+                .show();
+    }
+
+    @Override
+    public boolean itemLongClicked(int pos, double value) {
+        data.remove(pos);
+        Snackbar.make(recyclerView, "Deleted " + value, 5000) // show for 5 seconds
+                .setAction("Undo", view -> undo(pos, value))
+                .show();
+        adapter.notifyDataSetChanged();
+        return true;
+    }
+
+    private void undo(int pos, double value) {
+        data.add(pos, value);
+        adapter.notifyDataSetChanged();
     }
 
     /**
