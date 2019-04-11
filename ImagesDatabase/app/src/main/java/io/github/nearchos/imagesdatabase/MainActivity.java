@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION); // requires min api 19
                 ImageEntry imageEntry = new ImageEntry(uri.toString());
                 imagesRoomDatabase.imagesDao().insert(imageEntry);
-                imageEntries.add(imageEntry);
+                imageEntries.add(0, imageEntry); // add it first
                 arrayAdapter.notifyDataSetChanged();
             }
         }
