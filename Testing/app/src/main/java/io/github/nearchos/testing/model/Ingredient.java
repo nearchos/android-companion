@@ -17,7 +17,7 @@ public class Ingredient {
     private UnitType unitType;
 
     @Ignore // used for testing only
-    Ingredient(String name, Category category, UnitType unitType) {
+    public Ingredient(String name, Category category, UnitType unitType) {
         this.name = name;
         this.category = category;
         this.unitType = unitType;
