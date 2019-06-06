@@ -23,6 +23,8 @@ The included projects are:
 
 * [**UIDesign**](https://github.com/nearchos/android-companion/tree/master/UIDesign) discusses core Android UI design elements and layouts 
 
+* **ToastsSnackbarsAndNotifications** describes and demonstrates the use of toast and snackbar notifications, as well as notification messages in the system bar
+
 * [**ListOfItems**](https://github.com/nearchos/android-companion/tree/master/ListOfItems) describes how to build custom `ListView`s
 
 * [**RecyclerView**](https://github.com/nearchos/android-companion/tree/master/RecyclerView) describes the use of `RecyclerView` in an example
@@ -34,6 +36,8 @@ The included projects are:
 * [**Databases**](https://github.com/nearchos/android-companion/tree/master/Databases) discusses how to use the underlying SQLite database using standard SQL queries
 
 * [**Room**](https://github.com/nearchos/android-companion/tree/master/Room) describes the use of the Room high-level library for achievinf persistence
+
+* **ArchComp** provides an overview of Android Architecture Components and their use to simplify data-intensive apps
 
 ### Part V - Distributed Mobile Applications
 
