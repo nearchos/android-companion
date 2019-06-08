@@ -1,7 +1,7 @@
 # Android Mobile Apps
 ## A Coding Companion
 
-This page contains resources related to the **Android Companion** book.
+This page contains resources related to the **Android Mobile Apps: A Coding Companion** book.
 
 The included projects are:
 
@@ -9,7 +9,7 @@ The included projects are:
 
 * [**HelloJava**](https://github.com/nearchos/android-companion/tree/master/HelloJava) provides a brief review of Object Oriented programming with Java
 
-* **FingerChase** describes a custom-defined `View` which demonstrates custom drawing, background threads and handling of touch events
+* **FingerChase** describes a custom-defined `View` which demonstrates inheritance, custom drawing, background threads and handling of touch events
 
 ### Part II - Android App Fundamentals
 
@@ -23,6 +23,8 @@ The included projects are:
 
 * [**UIDesign**](https://github.com/nearchos/android-companion/tree/master/UIDesign) discusses core Android UI design elements and layouts 
 
+* **ToastsSnackbarsAndNotifications** describes and demonstrates the use of toast and snackbar notifications, as well as notification messages in the system bar
+
 * [**ListOfItems**](https://github.com/nearchos/android-companion/tree/master/ListOfItems) describes how to build custom `ListView`s
 
 * [**RecyclerView**](https://github.com/nearchos/android-companion/tree/master/RecyclerView) describes the use of `RecyclerView` in an example
@@ -34,6 +36,8 @@ The included projects are:
 * [**Databases**](https://github.com/nearchos/android-companion/tree/master/Databases) discusses how to use the underlying SQLite database using standard SQL queries
 
 * [**Room**](https://github.com/nearchos/android-companion/tree/master/Room) describes the use of the Room high-level library for achievinf persistence
+
+* **ArchComp** provides an overview of Android Architecture Components and their use to simplify data-intensive apps
 
 ### Part V - Distributed Mobile Applications
 
