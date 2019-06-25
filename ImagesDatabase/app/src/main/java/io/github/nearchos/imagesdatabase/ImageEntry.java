@@ -1,5 +1,6 @@
 package io.github.nearchos.imagesdatabase;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -9,8 +10,12 @@ import java.util.Date;
 @Entity(tableName = "images")
 public class ImageEntry implements Serializable {
 
-    @PrimaryKey(autoGenerate = true) private int id;
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "_id")
+    private int id;
+
     private long timestamp;
+
     private String uri;
 
     public ImageEntry(String uri) {

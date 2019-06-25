@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-@Database(entities = {ImageEntry.class}, version = 1)
+@Database(entities = {ImageEntry.class, RawImageEntry.class}, version = 1)
 public abstract class ImagesRoomDatabase extends RoomDatabase {
 
     public abstract ImagesDAO imagesDao();

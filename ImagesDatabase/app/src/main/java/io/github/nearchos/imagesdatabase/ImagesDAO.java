@@ -14,4 +14,10 @@ public interface ImagesDAO {
 
     @Query("SELECT * FROM images ORDER BY timestamp DESC")
     List<ImageEntry> getAllImages();
+
+    @Insert
+    void insert(RawImageEntry rawImageEntry);
+
+    @Query("SELECT * FROM raw_images ORDER BY timestamp DESC")
+    List<RawImageEntry> getAllRawImages();
 }
