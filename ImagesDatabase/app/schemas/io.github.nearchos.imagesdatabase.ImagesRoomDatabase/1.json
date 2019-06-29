@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c3408a449d7f90b50fce463f3a076fef",
+    "identityHash": "c6173a2190725fbdf8c69aad187e7b82",
     "entities": [
       {
         "tableName": "images",
@@ -38,7 +38,7 @@
       },
       {
         "tableName": "raw_images",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `timestamp` INTEGER NOT NULL, `image` BLOB, `name` TEXT, `size` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `timestamp` INTEGER NOT NULL, `image` BLOB, `name` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -63,12 +63,6 @@
             "columnName": "name",
             "affinity": "TEXT",
             "notNull": false
-          },
-          {
-            "fieldPath": "size",
-            "columnName": "size",
-            "affinity": "INTEGER",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -83,7 +77,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c3408a449d7f90b50fce463f3a076fef\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c6173a2190725fbdf8c69aad187e7b82\")"
     ]
   }
 }

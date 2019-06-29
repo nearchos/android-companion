@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -16,29 +17,28 @@ import java.io.IOException;
 class ImageDialog {
 
     private static Bitmap getBitmapFromUri(final Uri uri, final ContentResolver contentResolver) throws IOException {
-        ParcelFileDescriptor parcelFileDescriptor = contentResolver.openFileDescriptor(uri, "r");
-        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+        final ParcelFileDescriptor parcelFileDescriptor = contentResolver.openFileDescriptor(uri, "r");
+        final FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+        final Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
         parcelFileDescriptor.close();
         return image;
     }
 
-    static void showImageDialog(final Context context, final Uri imageUri) throws IOException {
-        final Bitmap bitmap = getBitmapFromUri(imageUri, context.getContentResolver());
-        final ImageView imageView = new ImageView(context);
-        imageView.setImageBitmap(bitmap);
+    static void showImageDialog(final Context context, final Uri imageUri) {
+        try {
+            final Bitmap bitmap = getBitmapFromUri(imageUri, context.getContentResolver());
+            final ImageView imageView = new ImageView(context);
+            imageView.setImageBitmap(bitmap);
 
-        new AlertDialog.Builder(context)
-                .setTitle("Image")
-                .setView(imageView)
-                .setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
-                .create()
-                .show();
+            new AlertDialog.Builder(context)
+                    .setTitle("Image")
+                    .setView(imageView)
+                    .setPositiveButton("Dismiss", (dialogInterface, i) -> dialogInterface.dismiss())
+                    .create()
+                    .show();
+        } catch (IOException ioe) {
+            Toast.makeText(context, "ERROR!\n" + ioe.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     static void showImageDialog(final Context context, final byte [] bytes) {
@@ -49,12 +49,7 @@ class ImageDialog {
         new AlertDialog.Builder(context)
                 .setTitle("Image")
                 .setView(imageView)
-                .setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                })
+                .setPositiveButton("Dismiss", (dialogInterface, i) -> dialogInterface.dismiss())
                 .create()
                 .show();
     }
