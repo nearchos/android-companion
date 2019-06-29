@@ -35,7 +35,9 @@ The included projects are:
 
 * [**Databases**](https://github.com/nearchos/android-companion/tree/master/Databases) discusses how to use the underlying SQLite database using standard SQL queries
 
-* [**Room**](https://github.com/nearchos/android-companion/tree/master/Room) describes the use of the Room high-level library for achievinf persistence
+* [**Room**](https://github.com/nearchos/android-companion/tree/master/Room) describes the use of the Room high-level library for achieving persistence
+
+* [**ImagesDatabase**](https://github.com/nearchos/android-companion/tree/master/ImagesDatabase) elaborates on the use of Room and covers storing of images or other large files in the database
 
 * **ArchComp** provides an overview of Android Architecture Components and their use to simplify data-intensive apps
 
