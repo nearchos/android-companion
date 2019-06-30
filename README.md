@@ -29,6 +29,8 @@ The included projects are:
 
 * [**RecyclerView**](https://github.com/nearchos/android-companion/tree/master/RecyclerView) describes the use of `RecyclerView` in an example
 
+* [**CustomView**](https://github.com/nearchos/android-companion/tree/master/CustomView) demonstrates how to define a `CustomView` by specializing an existing `View`
+
 ### Part IV - Persistence
 
 * [**Persistence**](https://github.com/nearchos/android-companion/tree/master/Persistence) explains how data persistence is achieved in Android and describes the preferences mechanism
