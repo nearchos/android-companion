@@ -6,6 +6,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,7 +49,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override public void onAccuracyChanged(Sensor sensor, int i) { /* ignore */ }
 
+    private float currentHeadingInDegrees = 0f;
+
     private void update(final float headingInDegrees) {
         headingTextView.setText(String.format(Locale.US, "Your phone is heading towards %.1f°", headingInDegrees));
+
+        // create a rotation animation
+        RotateAnimation rotateAnimation = new RotateAnimation(
+                currentHeadingInDegrees,
+                -headingInDegrees, // reverse degrees as we actually intend to point the device and keep the image fixed
+                Animation.RELATIVE_TO_SELF, 0.5f, // pivot from center horizontally...
+                Animation.RELATIVE_TO_SELF, 0.5f); // ///and vertically
+
+        rotateAnimation.setDuration(10); // the animation lasts 10ms
+        rotateAnimation.setFillAfter(true); // persist at the end
+
+        // Start the animation
+        compassImageView.startAnimation(rotateAnimation);
+        currentHeadingInDegrees = -headingInDegrees;
     }
 }
