@@ -54,3 +54,5 @@ The included projects are:
 ### Part VI - Android Recipes
 
 * [**PositioningAndMaps**](https://github.com/nearchos/android-companion/tree/master/PositioningAndMaps) provides examples on how to access the device position and how to show a map (from Google Maps)
+
+* [**Compass**](https://github.com/nearchos/android-companion/tree/master/Compass) provides examples on how to interface with a native sensor such as the magnetometer
