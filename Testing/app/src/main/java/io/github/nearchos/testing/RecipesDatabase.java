@@ -32,10 +32,7 @@ public abstract class RecipesDatabase extends RoomDatabase {
         if(INSTANCE == null) {
             synchronized (RecipesDatabase.class) {
                 if(INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(
-                            context.getApplicationContext(),
-                            RecipesDatabase.class,
-                            "recipes.db")
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), RecipesDatabase.class, "recipes.db")
                             .addCallback(new Callback() {
                                 @Override
                                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -58,11 +55,19 @@ public abstract class RecipesDatabase extends RoomDatabase {
     }
 
     public static final Ingredient [] INITIAL_INGREDIENTS = new Ingredient[] {
+            new Ingredient(0L, "Water", Category.WATER, UnitType.VOLUME),
             new Ingredient(0L, "Milk", Category.DAIRY, UnitType.VOLUME),
+            new Ingredient(0L, "Butter", Category.DAIRY, UnitType.VOLUME),
+            new Ingredient(0L, "Grated cheese", Category.DAIRY, UnitType.WEIGHT),
             new Ingredient(0L, "Egg", Category.EGGS, UnitType.ENUMERABLE),
             new Ingredient(0L, "Pork", Category.MEAT, UnitType.WEIGHT),
             new Ingredient(0L, "Olive oil", Category.OILS, UnitType.VOLUME),
             new Ingredient(0L, "Tomato", Category.VEGETABLE, UnitType.WEIGHT),
-            new Ingredient(0L, "Bell pepper", Category.VEGETABLE, UnitType.WEIGHT)
+            new Ingredient(0L, "Flour", Category.GRAINS, UnitType.VOLUME),
+            new Ingredient(0L, "Rice", Category.GRAINS, UnitType.VOLUME),
+            new Ingredient(0L, "Pasta", Category.GRAINS, UnitType.WEIGHT),
+            new Ingredient(0L, "Bell pepper", Category.VEGETABLE, UnitType.WEIGHT),
+            new Ingredient(0L, "Salt", Category.SPICE, UnitType.VOLUME),
+            new Ingredient(0L, "Black pepper", Category.SPICE, UnitType.VOLUME)
     };
 }

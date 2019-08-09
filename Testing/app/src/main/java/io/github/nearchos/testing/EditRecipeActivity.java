@@ -12,9 +12,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
+import io.github.nearchos.testing.model.FlattenIngredientToRecipe;
+import io.github.nearchos.testing.model.Ingredient;
 import io.github.nearchos.testing.model.IngredientToRecipe;
 import io.github.nearchos.testing.model.Recipe;
 
@@ -32,8 +36,8 @@ public class EditRecipeActivity extends AppCompatActivity {
     private TextView seekBarLabelTextView;
     private SeekBar seekBar;
 
-    final List<IngredientToRecipe> ingredientToRecipes = new Vector<>();
-    private ArrayAdapter<IngredientToRecipe> ingredientToRecipeArrayAdapter;
+    final List<FlattenIngredientToRecipe> flattenIngredientToRecipes = new Vector<>();
+    private ArrayAdapter<FlattenIngredientToRecipe> ingredientToRecipeArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,7 @@ public class EditRecipeActivity extends AppCompatActivity {
         this.seekBar = findViewById(R.id.seekBar);
 
         ingredientToRecipeArrayAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_list_item_1, ingredientToRecipes
+                this, android.R.layout.simple_list_item_1, flattenIngredientToRecipes
         );
         ingredientsListView.setAdapter(ingredientToRecipeArrayAdapter);
 
@@ -57,17 +61,18 @@ public class EditRecipeActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // delete selected ingredient
-                final IngredientToRecipe removedIngredientToRecipe = ingredientToRecipes.remove(i);
-                recipesDao.delete(removedIngredientToRecipe);
+                final FlattenIngredientToRecipe flattenIngredientToRecipe = flattenIngredientToRecipes.remove(i);
+                final IngredientToRecipe ingredientToRecipe = recipesDao.get(flattenIngredientToRecipe.getIngredientToRecipeId());
+                recipesDao.delete(ingredientToRecipe);
                 ingredientToRecipeArrayAdapter.notifyDataSetChanged();
                 return true;
             }
         });
 
-        seekBarLabelTextView.setText(PREPARATION_TIMES[seekBar.getProgress()] + " minutes");
+        seekBarLabelTextView.setText(getString(R.string.Preparation_time, PREPARATION_TIMES[seekBar.getProgress()]));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                seekBarLabelTextView.setText(PREPARATION_TIMES[i] + " minutes");
+            @Override public void onProgressChanged(SeekBar seekBar, int index, boolean b) {
+                seekBarLabelTextView.setText(getString(R.string.Preparation_time, PREPARATION_TIMES[index]));
             }
 
             @Override public void onStartTrackingTouch(SeekBar seekBar) { /* empty */ }
@@ -91,11 +96,25 @@ public class EditRecipeActivity extends AppCompatActivity {
         nameEditText.setText(recipe.getName());
         descriptionEditText.setText(recipe.getDescription());
 
-        ingredientToRecipes.addAll(recipesDao.getIngredientToRecipeForRecipe(recipeId));
+        final List<Ingredient> allIngredients = recipesDao.getAllIngredients();
+        final Map<Long,Ingredient> ingredientMap = new HashMap<>();
+        for(final Ingredient ingredient : allIngredients) {
+            ingredientMap.put(ingredient.getId(), ingredient);
+        }
+        final List<IngredientToRecipe> ingredientToRecipeList = recipesDao.getIngredientToRecipeForRecipe(recipeId);
+        for(final IngredientToRecipe ingredientToRecipe : ingredientToRecipeList) {
+            flattenIngredientToRecipes.add(new FlattenIngredientToRecipe(ingredientToRecipe, ingredientMap));
+        }
         ingredientToRecipeArrayAdapter.notifyDataSetChanged();
 
         final int index = Arrays.binarySearch(PREPARATION_TIMES, recipe.getPreparationTimeInMinutes());
         seekBar.setProgress(index);
+    }
+
+    @Override
+    protected void onPause() {
+        save();
+        super.onPause();
     }
 
     public void addIngredient(View view) {
@@ -104,7 +123,7 @@ public class EditRecipeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void save(View view) {
+    public void save() {
         String name = nameEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
         int preparationTime = PREPARATION_TIMES[seekBar.getProgress()];

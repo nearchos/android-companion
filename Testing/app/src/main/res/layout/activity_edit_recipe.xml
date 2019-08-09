@@ -40,21 +40,11 @@
     <EditText
         android:id="@+id/descriptionEditText"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionLabelTextView"/>
-
-    <Button
-        android:id="@+id/saveButton"
-        android:onClick="save"
-        android:text="Save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <SeekBar
         android:id="@+id/seekBar"
@@ -66,13 +56,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/saveButton"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/seekBarLabelTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Preparation time"
+        android:text="@string/Preparation_time"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/seekBar" />
@@ -81,7 +71,7 @@
         android:id="@+id/igredientsLabelTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ingredients"
+        android:text="Ingredients (long press to remove)"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/descriptionEditText" />

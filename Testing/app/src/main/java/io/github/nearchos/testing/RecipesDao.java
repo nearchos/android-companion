@@ -34,13 +34,16 @@ public interface RecipesDao {
     @Update
     void update(Recipe recipe);
 
+    @Query("SELECT * FROM ingredients_to_recipes WHERE _id=:id")
+    IngredientToRecipe get(long id);
+
     @Query("SELECT * FROM recipes ORDER BY creationTimestamp")
     List<Recipe> getAllRecipes();
 
     @Query("SELECT * FROM recipes WHERE _id=:recipeId")
     Recipe getRecipe(long recipeId);
 
-    @Query("SELECT * FROM ingredients")
+    @Query("SELECT * FROM ingredients ORDER BY name")
     List<Ingredient> getAllIngredients();
 
     @Query("SELECT * FROM ingredients WHERE _id IN (:recipeId)")

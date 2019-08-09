@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Testing</string>
+    <string name="Preparation_time">Preparation time: %1$d minutes</string>
 </resources>

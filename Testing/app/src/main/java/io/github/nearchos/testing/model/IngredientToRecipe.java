@@ -33,7 +33,7 @@ public class IngredientToRecipe {
         this.quantity = quantity;
     }
 
-    public long get_id() {
+    public long getId() {
         return _id;
     }
 
