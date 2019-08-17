@@ -12,6 +12,12 @@ import java.util.List;
 
 import io.github.nearchos.testing.model.Recipe;
 
+/**
+ * The main activity of the app.
+ * It shows a list of recipes and offers an option to a add a new recipe.
+ * By selecting a recipe you view it in edit mode.
+ * A long press deletes a recipe.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private RecipesDao recipesDao;
@@ -25,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         recipesDao = RecipesDatabase.getDatabase(this).recipesDao();
 
-        listView = findViewById(R.id.listView);
+        listView = findViewById(R.id.recipesListView);
     }
 
     @Override
@@ -35,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         final List<Recipe> recipes = recipesDao.getAllRecipes();
 
         final ArrayAdapter<Recipe> recipeArrayAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_list_item_1, recipes);
+                this, R.layout.recipe_list_item, recipes);
         listView.setAdapter(recipeArrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

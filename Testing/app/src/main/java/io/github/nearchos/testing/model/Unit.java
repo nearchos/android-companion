@@ -7,15 +7,19 @@ package io.github.nearchos.testing.model;
 public enum Unit {
 
     EACH("each", "each", UnitType.ENUMERABLE),
+    DOZEN("dozen", "dz", UnitType.ENUMERABLE), // e.g. of eggs
     BATCH("batch", "batch", UnitType.ENUMERABLE), // e.g. of celery
-    DOZEN("dozen", "dozen", UnitType.ENUMERABLE), // e.g. of eggs
+
     GR("gram", "g", UnitType.WEIGHT),
     KGR("kilogram", "Kg", UnitType.WEIGHT),
-    ML("milliliter", "mL", UnitType.VOLUME),
+    LB("pound/libra", "Lb", UnitType.WEIGHT),
+    OZ("Ounce", "oz", UnitType.WEIGHT),
+
     L("liter", "L", UnitType.VOLUME),
+    ML("milliliter", "mL", UnitType.VOLUME),
     CUP("cup", "cup", UnitType.VOLUME), // 250 mL
-    TB("tablespoon", "tbsp", UnitType.VOLUME), // 15 mL
-    TS("teaspoon", "ts", UnitType.VOLUME); // 5 mL
+    TB("tablespoon", "Tbsp.", UnitType.VOLUME), // 15 mL
+    TS("teaspoon", "tsp.", UnitType.VOLUME); // 5 mL
 
     private String fullName;
     private String shortName;

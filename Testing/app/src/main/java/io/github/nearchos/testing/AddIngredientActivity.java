@@ -84,8 +84,8 @@ public class AddIngredientActivity extends AppCompatActivity {
         final Ingredient selectedIngredient = (Ingredient) ingredientSpinner.getSelectedItem();
         final Unit selectedUnit = (Unit) unitSpinner.getSelectedItem();
         String quantityString = quantityEditText.getText().toString();
-        int quantity = 1;
-        try { quantity = Integer.parseInt(quantityString); } catch (NumberFormatException nfe) {}
+        double quantity = 1d;
+        try { quantity = Double.parseDouble(quantityString); } catch (NumberFormatException nfe) {}
 
         IngredientToRecipe ingredientToRecipe = new IngredientToRecipe(0L, recipeId, selectedIngredient.getId(), selectedUnit, quantity);
         recipesDao.insert(ingredientToRecipe);

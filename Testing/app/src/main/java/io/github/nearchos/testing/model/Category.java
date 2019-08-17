@@ -7,10 +7,10 @@ package io.github.nearchos.testing.model;
 public enum Category {
 
     WATER,
-    MEAT,
-    DAIRY,
-    EGGS,
     OILS,
+    DAIRY,
+    MEAT,
+    EGGS,
     GRAINS,
     VEGETABLE,
     FRUIT,

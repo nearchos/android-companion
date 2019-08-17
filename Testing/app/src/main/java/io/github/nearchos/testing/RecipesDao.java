@@ -61,6 +61,9 @@ public interface RecipesDao {
     @Delete
     void delete(Recipe recipe);
 
+    @Query("DELETE FROM recipes WHERE _id=:recipeId")
+    void delete(long recipeId);
+
     @Delete
     void delete(IngredientToRecipe ingredientToRecipe);
 }

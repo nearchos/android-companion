@@ -87,7 +87,7 @@
         app:layout_constraintBottom_toTopOf="@id/seekBarLabelTextView"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabAddIngredient"
         android:onClick="addIngredient"
         android:src="@drawable/ic_add_black_24dp"
         android:layout_width="wrap_content"

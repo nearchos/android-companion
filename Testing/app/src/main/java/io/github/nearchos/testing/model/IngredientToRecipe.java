@@ -23,9 +23,9 @@ public class IngredientToRecipe {
     @ColumnInfo(name = "recipe_id") private long recipeId;
     @ColumnInfo(name = "ingredient_id") private  long ingredientId;
     private Unit unit;
-    private int quantity;
+    private double quantity;
 
-    public IngredientToRecipe(long _id, long recipeId, long ingredientId, Unit unit, int quantity) {
+    public IngredientToRecipe(long _id, long recipeId, long ingredientId, Unit unit, double quantity) {
         this._id = _id;
         this.recipeId = recipeId;
         this.ingredientId = ingredientId;
@@ -49,7 +49,7 @@ public class IngredientToRecipe {
         return unit;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 

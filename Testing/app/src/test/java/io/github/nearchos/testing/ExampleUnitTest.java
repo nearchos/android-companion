@@ -2,6 +2,8 @@ package io.github.nearchos.testing;
 
 import org.junit.Test;
 
+import io.github.nearchos.testing.model.Unit;
+
 import static org.junit.Assert.*;
 
 /**
@@ -11,21 +13,21 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
 
-    public static final double DELTA = 0.001d;
+    public static final double DELTA = 0.001d; // set the required precision to 1/1000th
 
     @Test
     public void conversionLiters() {
         assertEquals( // 1 Liter = 4 cups ?
-                Conversions.convertCupsToMl(4),
-                Conversions.convertLitersToMl(1),
+                Conversions.convert(Unit.CUP, Unit.ML, 4),
+                Conversions.convert(Unit.L, Unit.ML, 1),
                 DELTA);
     }
 
     @Test
     public void conversionCups() {
         assertEquals( // 1 cup = 50 teaspoons ?
-                Conversions.convertCupsToMl(1),
-                Conversions.convertTeaspoonToMl(50),
+                Conversions.convert(Unit.CUP, Unit.ML, 1),
+                Conversions.convert(Unit.TS, Unit.ML, 50),
                 DELTA
         );
     }
@@ -33,8 +35,8 @@ public class ExampleUnitTest {
     @Test
     public void conversionTablespoons() {
         assertEquals( // 1 tablespoon = 3 teaspoons ?
-                Conversions.convertTablespoonToMl(1),
-                Conversions.convertTeaspoonToMl(3),
+                Conversions.convert(Unit.TB, Unit.ML, 1),
+                Conversions.convert(Unit. TS, Unit.ML, 3),
                 DELTA
         );
     }

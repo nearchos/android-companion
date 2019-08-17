@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">Testing</string>
+    <string name="app_name">Recipes</string>
+    <string name="OK">OK</string>
+    <string name="Dismiss">Dismiss</string>
     <string name="Preparation_time">Preparation time: %1$d minutes</string>
+    <string name="Conversions">Conversions</string>
+    <string name="Conversion_icon">Conversion icon</string>
+    <string name="No_conversions_available_for_this_unit">No conversions available for this unit</string>
 </resources>

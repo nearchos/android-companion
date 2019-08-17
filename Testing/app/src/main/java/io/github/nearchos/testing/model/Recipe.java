@@ -48,8 +48,9 @@ public class Recipe implements Serializable {
 
     @Override
     public String toString() {
-        final int limitChars = 24;
-        final String truncatedDescription = description.length() > limitChars + 3 ? description.substring(0, limitChars) + "..." : description;
-        return name + " (" + preparationTimeInMinutes + " m)" + "\n" + truncatedDescription;
+//        final int limitChars = 32;
+//        final String truncatedDescription = description.length() > limitChars + 3 ? description.substring(0, limitChars) + "..." : description;
+//        return name + " (" + preparationTimeInMinutes + " m)" + "\n" + truncatedDescription;
+        return name;
     }
 }

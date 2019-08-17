@@ -59,6 +59,7 @@ public abstract class RecipesDatabase extends RoomDatabase {
             new Ingredient(0L, "Milk", Category.DAIRY, UnitType.VOLUME),
             new Ingredient(0L, "Butter", Category.DAIRY, UnitType.VOLUME),
             new Ingredient(0L, "Grated cheese", Category.DAIRY, UnitType.WEIGHT),
+            new Ingredient(0L, "Shredded cheese", Category.DAIRY, UnitType.VOLUME),
             new Ingredient(0L, "Egg", Category.EGGS, UnitType.ENUMERABLE),
             new Ingredient(0L, "Pork", Category.MEAT, UnitType.WEIGHT),
             new Ingredient(0L, "Olive oil", Category.OILS, UnitType.VOLUME),
