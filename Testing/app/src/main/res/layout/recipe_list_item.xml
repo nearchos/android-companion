@@ -8,4 +8,6 @@
     android:gravity="center_vertical"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:minHeight="?android:attr/listPreferredItemHeightLarge" />
+    android:minHeight="?android:attr/listPreferredItemHeightLarge"
+    android:maxHeight="?android:attr/listPreferredItemHeightLarge"
+    />

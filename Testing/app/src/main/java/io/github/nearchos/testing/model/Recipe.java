@@ -5,10 +5,6 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
 
-/**
- * @author Nearchos
- * Created: 24-Apr-19
- */
 @Entity(tableName = "recipes")
 public class Recipe implements Serializable {
 
@@ -46,11 +42,12 @@ public class Recipe implements Serializable {
         return preparationTimeInMinutes;
     }
 
+    /**
+     * Overloaded default method to create proper text-representation to be used in list adapter.
+     * @return a string representation of the recipe, via its name and preparation time
+     */
     @Override
     public String toString() {
-//        final int limitChars = 32;
-//        final String truncatedDescription = description.length() > limitChars + 3 ? description.substring(0, limitChars) + "..." : description;
-//        return name + " (" + preparationTimeInMinutes + " m)" + "\n" + truncatedDescription;
-        return name;
+        return name + " (" + preparationTimeInMinutes + " minutes)";
     }
 }

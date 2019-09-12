@@ -15,6 +15,10 @@ import io.github.nearchos.testing.model.Ingredient;
 import io.github.nearchos.testing.model.IngredientToRecipe;
 import io.github.nearchos.testing.model.Unit;
 
+/**
+ * This activity customizes an ingredient. It allows the user to pick an ingredient (like 'flour)
+ * from a pre-selected list, a preferred unit type (like 'cup') and quantity.
+ */
 public class AddIngredientActivity extends AppCompatActivity {
 
     private RecipesDao recipesDao;
@@ -64,9 +68,7 @@ public class AddIngredientActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // empty
-            }
+            public void onNothingSelected(AdapterView<?> adapterView) { /* empty */ }
         });
     }
 
@@ -79,6 +81,12 @@ public class AddIngredientActivity extends AppCompatActivity {
         this.recipeId = getIntent().getLongExtra("recipeId", 0L);
     }
 
+    /**
+     * When the user selects an ingredient, it is added to the database and the activity is
+     * finalized, returning to the previous one.
+     *
+     * @param view
+     */
     public void select(View view) {
         // save
         final Ingredient selectedIngredient = (Ingredient) ingredientSpinner.getSelectedItem();

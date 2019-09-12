@@ -24,8 +24,14 @@ import io.github.nearchos.testing.model.Recipe;
 import io.github.nearchos.testing.model.Unit;
 import io.github.nearchos.testing.model.UnitType;
 
+/**
+ * Used to view and edit a selected recipe. The user can edit the name description, and pick a
+ * preparation time from a SeekBar.
+ * Finally, it enables viewing, adding or deleting ingredients to a list.
+ */
 public class EditRecipeActivity extends AppCompatActivity {
 
+    // options for the preparation time SeekBar
     public static final int [] PREPARATION_TIMES = {
             5, 10, 15, 20, 25, 30, 40, 45, 60, 90
     };
@@ -40,6 +46,8 @@ public class EditRecipeActivity extends AppCompatActivity {
     final List<FlattenIngredientToRecipe> flattenIngredientToRecipes = new Vector<>();
     private ArrayAdapter<FlattenIngredientToRecipe> ingredientToRecipeArrayAdapter;
 
+    private Map<Long,Ingredient> ingredientMap = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,34 +61,48 @@ public class EditRecipeActivity extends AppCompatActivity {
         this.seekBarLabelTextView = findViewById(R.id.seekBarLabelTextView);
         this.seekBar = findViewById(R.id.seekBar);
 
+        // init map with all ingredient ids to ingredients - needed for formatting ingredients list
+        final List<Ingredient> allIngredients = recipesDao.getAllIngredients();
+        for(final Ingredient ingredient : allIngredients) {
+            ingredientMap.put(ingredient.getId(), ingredient);
+        }
+
+        // prepare the ingredients list and list adapter (empty when the activity is created)
         ingredientToRecipeArrayAdapter = new ArrayAdapter<>(
                 this, R.layout.ingredient_list_item, flattenIngredientToRecipes
         );
         ingredientsListView.setAdapter(ingredientToRecipeArrayAdapter);
 
+        // clicking on an ingredient produces a dialog showing all conversions for the ingredient's unit
         ingredientsListView.setOnItemClickListener((parent, view, position, id) -> {
-            final Vector<String> conversions = new Vector<>();
-            final FlattenIngredientToRecipe flattenIngredientToRecipe = flattenIngredientToRecipes.get(position);
-            final Unit source  = flattenIngredientToRecipe.getUnit();
+            final FlattenIngredientToRecipe selectedFlattenIngredientToRecipe = flattenIngredientToRecipes.get(position);
+            final Unit source  = selectedFlattenIngredientToRecipe.getUnit();
             final UnitType selectedUnitType = source .getUnitType();
-            for(Unit target : Unit.values()) {
-                if(target.getUnitType() == selectedUnitType && target != source ) {
-                    final Double equivalentQuantity = Conversions.convert(source , target, flattenIngredientToRecipe.getQuantity());
+
+            final Vector<String> conversions = new Vector<>(); // init an empty list to add all possible conversions
+            for(Unit target : Unit.values()) { // iterate all units ...
+                if(target.getUnitType() == selectedUnitType // ... and pick those of same type (e.g. weight, volume) ...
+                        && target != source ) { // ... and exclude the unit matching the source ...
+                    // check if a conversion exists from source to target ...
+                    final Double equivalentQuantity = Conversions.convert(source , target, selectedFlattenIngredientToRecipe.getQuantity());
+                    // ... and if so, add it to the list
                     if(!Double.isNaN(equivalentQuantity)) conversions.add(" ~ " + equivalentQuantity + " " + target.getShortName());
                 }
             }
 
+            // if no conversions were found, add a message instead
             if(conversions.isEmpty()) conversions.add(getString(R.string.No_conversions_available_for_this_unit));
 
-            // show conversion metrics
+            // show conversion metrics as an alert dialog
             new AlertDialog.Builder(this)
-                    .setTitle(flattenIngredientToRecipe.toString())
+                    .setTitle(selectedFlattenIngredientToRecipe.toString())
                     .setItems(conversions.toArray(new String[0]), null)
                     .setPositiveButton(R.string.Dismiss, (dialog, which) -> dialog.dismiss())
                     .create()
                     .show();
         });
 
+        // a long click deletes the ingredient without warning (OK for a toy/testing app, but not for a commercial one)
         ingredientsListView.setOnItemLongClickListener((adapterView, view, i, l) -> {
             // delete selected ingredient
             final FlattenIngredientToRecipe flattenIngredientToRecipe = flattenIngredientToRecipes.remove(i);
@@ -90,6 +112,7 @@ public class EditRecipeActivity extends AppCompatActivity {
             return true;
         });
 
+        // handle changes to the 'preparation time' SeekBar, e.g. by updating the label
         final String formattedPreparationTimeLabel = getString(R.string.Preparation_time, PREPARATION_TIMES[seekBar.getProgress()]);
         seekBarLabelTextView.setText(formattedPreparationTimeLabel);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -103,26 +126,24 @@ public class EditRecipeActivity extends AppCompatActivity {
         });
     }
 
-    private long recipeId;
+    private long recipeId; // current recipe
 
     @Override
     protected void onResume() {
         super.onResume();
 
+        // take recipe id from intent ...
         this.recipeId = getIntent().getLongExtra("recipeId", 0L);
 
-        // init fields
-        Recipe recipe = recipesDao.getRecipe(recipeId);
+        // ... and use id to load recipe from DAO
+        final Recipe recipe = recipesDao.getRecipe(recipeId);
         assert recipe != null;
 
+        // init UI elements
         nameEditText.setText(recipe.getName());
         descriptionEditText.setText(recipe.getDescription());
 
-        final List<Ingredient> allIngredients = recipesDao.getAllIngredients();
-        final Map<Long,Ingredient> ingredientMap = new HashMap<>();
-        for(final Ingredient ingredient : allIngredients) {
-            ingredientMap.put(ingredient.getId(), ingredient);
-        }
+        // get ingredients for specified recipe and populate ingredients list
         flattenIngredientToRecipes.clear();
         final List<IngredientToRecipe> ingredientToRecipeList = recipesDao.getIngredientToRecipeForRecipe(recipeId);
         for(final IngredientToRecipe ingredientToRecipe : ingredientToRecipeList) {
@@ -132,12 +153,6 @@ public class EditRecipeActivity extends AppCompatActivity {
 
         final int index = Arrays.binarySearch(PREPARATION_TIMES, recipe.getPreparationTimeInMinutes());
         seekBar.setProgress(index);
-    }
-
-    @Override
-    protected void onPause() {
-        save();
-        super.onPause();
     }
 
     public void addIngredient(View view) {
@@ -153,11 +168,23 @@ public class EditRecipeActivity extends AppCompatActivity {
 
         if(name.trim().isEmpty() && description.trim().isEmpty() && flattenIngredientToRecipes.isEmpty()) {
             // empty recipe, thus just delete from DAO
-            recipesDao.delete(recipeId);
+            recipesDao.deleteRecipe(recipeId);
         } else {
             // update recipe in DAO
             Recipe recipe = new Recipe(recipeId, name, description, System.currentTimeMillis(), preparationTime);
             recipesDao.update(recipe);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        save();
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        save();
+        super.onDestroy();
     }
 }

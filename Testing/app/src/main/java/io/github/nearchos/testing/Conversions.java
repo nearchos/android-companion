@@ -5,6 +5,9 @@ import java.util.Map;
 
 import io.github.nearchos.testing.model.Unit;
 
+/**
+ * Includes functionality for converting between common weight and volume units.
+ */
 public class Conversions {
 
     /**
@@ -18,7 +21,7 @@ public class Conversions {
      * @param quantity the quantity of the source {@link Unit}
      * @return the computed quantity of the target {@link Unit}
      */
-    static Double convert(Unit source, Unit target, double quantity) {
+    static Double convert(Unit source, Unit target, Double quantity) {
         if(source == null || target == null)
             throw new NullPointerException("Invalid null argument");
         if(source.getUnitType() != target.getUnitType())
@@ -73,12 +76,12 @@ public class Conversions {
     }};
 
     private static class UnitPair {
-        Unit fromUnit;
-        Unit toUnit;
+        Unit source;
+        Unit target;
 
-        UnitPair(Unit fromUnit, Unit toUnit) {
-            this.fromUnit = fromUnit;
-            this.toUnit = toUnit;
+        UnitPair(Unit source, Unit target) {
+            this.source = source;
+            this.target = target;
         }
 
         @Override
@@ -86,12 +89,12 @@ public class Conversions {
             if (this == other) return true;
             if (other == null || getClass() != other.getClass()) return false;
             UnitPair unitPair = (UnitPair) other;
-            return fromUnit == unitPair.fromUnit && toUnit == unitPair.toUnit;
+            return source == unitPair.source && target == unitPair.target;
         }
 
         @Override
         public int hashCode() {
-            return fromUnit.hashCode() * 17 + toUnit.hashCode();
+            return source.hashCode() ^ target.hashCode();
         }
     }
 }

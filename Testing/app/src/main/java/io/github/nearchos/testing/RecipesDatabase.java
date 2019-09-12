@@ -16,10 +16,6 @@ import io.github.nearchos.testing.model.IngredientToRecipe;
 import io.github.nearchos.testing.model.Recipe;
 import io.github.nearchos.testing.model.UnitType;
 
-/**
- * @author Nearchos
- * Created: 24-Apr-19
- */
 @Database(entities = {Recipe.class, Ingredient.class, IngredientToRecipe.class}, version = 1, exportSchema = false)
 @TypeConverters(DatabaseConverters.class)
 public abstract class RecipesDatabase extends RoomDatabase {
@@ -37,16 +33,11 @@ public abstract class RecipesDatabase extends RoomDatabase {
                                 @Override
                                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
                                     super.onCreate(db);
-                                    // prepare database
-                                    Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            getDatabase(context).recipesDao().insertAll(INITIAL_INGREDIENTS);
-                                        }
-                                    });
+                                    // prepare database by populating default entries
+                                    Executors.newSingleThreadScheduledExecutor().execute(() -> getDatabase(context).recipesDao().insertAll(INITIAL_INGREDIENTS));
                                 }
                             })
-                            .allowMainThreadQueries()
+                            .allowMainThreadQueries() // ok for a toy app to run DB operations on UI thread
                             .build();
                 }
             }

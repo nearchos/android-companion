@@ -6,18 +6,16 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-/**
- * @author Nearchos
- * Created: 24-Apr-19
- */
 @Entity(tableName = "ingredients_to_recipes",
     foreignKeys = {
         @ForeignKey(entity = Recipe.class, parentColumns = "_id", childColumns = "recipe_id", onDelete = CASCADE),
         @ForeignKey(entity = Ingredient.class, parentColumns = "_id", childColumns = "ingredient_id")},
     indices ={ @Index("recipe_id"), @Index("ingredient_id")})
-public class IngredientToRecipe {
+public class IngredientToRecipe implements Serializable {
 
     @PrimaryKey(autoGenerate = true) private long _id;
     @ColumnInfo(name = "recipe_id") private long recipeId;

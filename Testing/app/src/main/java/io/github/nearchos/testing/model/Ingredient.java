@@ -4,12 +4,10 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-/**
- * @author Nearchos
- * Created: 24-Apr-19
- */
+import java.io.Serializable;
+
 @Entity(tableName = "ingredients")
-public class Ingredient {
+public class Ingredient implements Serializable {
 
     @PrimaryKey(autoGenerate = true) private long _id;
     private String name;
@@ -46,6 +44,10 @@ public class Ingredient {
         return unitType;
     }
 
+    /**
+     * Overloaded default method to create proper text-representation to be used in list adapter.
+     * @return a string representation of the ingredient, via its name
+     */
     @Override
     public String toString() {
         return name;

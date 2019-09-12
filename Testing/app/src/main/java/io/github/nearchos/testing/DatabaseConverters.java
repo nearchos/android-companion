@@ -6,10 +6,6 @@ import io.github.nearchos.testing.model.Category;
 import io.github.nearchos.testing.model.Unit;
 import io.github.nearchos.testing.model.UnitType;
 
-/**
- * @author Nearchos
- * Created: 24-Apr-19
- */
 public class DatabaseConverters {
 
     // handling Category conversions for DB save/load

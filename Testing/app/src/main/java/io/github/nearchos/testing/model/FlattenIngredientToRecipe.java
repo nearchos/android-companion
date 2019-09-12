@@ -2,10 +2,6 @@ package io.github.nearchos.testing.model;
 
 import java.util.Map;
 
-/**
- * @author Nearchos
- * Created: 19-Jul-19
- */
 public class FlattenIngredientToRecipe {
 
     private final long ingredientToRecipeId;

@@ -1,9 +1,5 @@
 package io.github.nearchos.testing.model;
 
-/**
- * @author Nearchos
- * Created: 24-Apr-19
- */
 public enum Unit {
 
     EACH("each", "each", UnitType.ENUMERABLE),

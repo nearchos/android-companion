@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -34,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.recipesListView);
     }
 
+    /**
+     * Initializes the list with data from DAO.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -43,27 +45,34 @@ public class MainActivity extends AppCompatActivity {
         final ArrayAdapter<Recipe> recipeArrayAdapter = new ArrayAdapter<>(
                 this, R.layout.recipe_list_item, recipes);
         listView.setAdapter(recipeArrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Recipe selectedRecipe = recipes.get(i);
-                // start activity to edit it
-                final Intent intent = new Intent(MainActivity.this, EditRecipeActivity.class);
-                intent.putExtra("recipeId", selectedRecipe.getId());
-                startActivity(intent);
-            }
+
+        // a plain click opens the recipe for viewing/editing
+        listView.setOnItemClickListener((adapterView, view, i, l) -> {
+            Recipe selectedRecipe = recipes.get(i);
+            // start activity to edit it
+            final Intent intent = new Intent(MainActivity.this, EditRecipeActivity.class);
+            intent.putExtra("recipeId", selectedRecipe.getId());
+            startActivity(intent);
         });
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Recipe deletedRecipe = recipes.remove(i);
-                recipesDao.delete(deletedRecipe);
-                recipeArrayAdapter.notifyDataSetChanged();
-                return true;
-            }
+
+        // a long click deletes the recipe without warning (OK for a toy/testing app, but not for a commercial one)
+        listView.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            Recipe deletedRecipe = recipes.remove(i);
+            recipesDao.delete(deletedRecipe);
+            recipeArrayAdapter.notifyDataSetChanged();
+            return true;
         });
     }
 
+    /**
+     * Creates and stores a new {@link Recipe} and passes it on to the {@link EditRecipeActivity}.
+     * The empty {@link Recipe} is needed so that the {@link EditRecipeActivity} can add
+     * {@link io.github.nearchos.testing.model.Ingredient}s to it. If that activity is finalized
+     * before adding any {@link io.github.nearchos.testing.model.Ingredient}s and before setting a
+     * title or description, then the {@link Recipe} is deleted.
+     *
+     * @param view required to enable direct invocation from the layout element
+     */
     public void addRecipe(View view) {
         // create and store a new, empty recipe
         Recipe recipe = new Recipe(0L, "", "", System.currentTimeMillis(), EditRecipeActivity.PREPARATION_TIMES[3]);

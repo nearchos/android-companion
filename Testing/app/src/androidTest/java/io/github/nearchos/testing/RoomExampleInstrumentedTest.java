@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import androidx.test.InstrumentationRegistry;
+import androidx.test.filters.MediumTest;
 import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.After;
@@ -29,8 +30,11 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@MediumTest
 @RunWith(AndroidJUnit4.class)
 public class RoomExampleInstrumentedTest {
+
+    private static final double DELTA = 0.001d; // set the required precision to 1/1000th
 
     private RecipesDao recipesDao;
     private RecipesDatabase recipesDatabase;
@@ -90,29 +94,25 @@ public class RoomExampleInstrumentedTest {
         final List<Ingredient> ingredients = recipesDao.getIngredientIdsForRecipe(ingredientIds);
         assertNotNull(ingredients);
         assertEquals(ingredients.size(), 2);
-
-        recipesDao.getIngredientIdsForRecipe(recipeId);
     }
 
     @Test
     public void checkQuantities() {
-        final int eggsQuantity = recipesDao.getQuantityForIngredient(recipeId, eggId);
-        assertEquals(eggsQuantity, 1);
+        final double eggsQuantity = recipesDao.getQuantityForIngredient(recipeId, eggId);
+        assertEquals(eggsQuantity, 1, DELTA);
 
-        final int oliveOilQuantity = recipesDao.getQuantityForIngredient(recipeId, oliveOilId);
-        assertEquals(oliveOilQuantity, 2);
+        final double oliveOilQuantity = recipesDao.getQuantityForIngredient(recipeId, oliveOilId);
+        assertEquals(oliveOilQuantity, 2, DELTA);
     }
 
     @Test
-    public void checkDelete() {
-        // verify than deletes cascade across FKs, i.e. when a recipe is deleted, so are the
-        // corresponding entries in the ingredients_to_recipes table
+    public void checkDelete() { // verify than 'deletes' cascade over to FKs
         final Recipe recipe = recipesDao.getRecipe(recipeId);
         assertNotNull(recipe);
 
-        recipesDao.delete(recipe);
+        recipesDao.delete(recipe); // i.e. when a recipe is deleted ...
 
-        // check that there are no corresponding ingredients
+        // ... so are the corresponding entries in the ingredients_to_recipes table
         final List<Long> ingredientIds = recipesDao.getIngredientIdsForRecipe(recipeId);
         assertNotNull(ingredientIds);
         assertEquals(ingredientIds.size(), 0);
