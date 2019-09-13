@@ -3,6 +3,9 @@
 
 This page contains resources related to the **Android Mobile Apps: A Coding Companion** book.
 
+> This work is licensed under the **Creative Commons Attribution-NonCommercial-NoDerivs 3.0** United States License, described at this URL: <https://creativecommons.org/licenses/by-nc-nd/3.0/us/>.
+Unless required by applicable law or agreed to in writing, code listed in this site is distributed on "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+
 The included projects are:
 
 ### Part I - Object Orientation with Java
@@ -60,4 +63,3 @@ The included projects are:
 * [**PositioningAndMaps**](https://github.com/nearchos/android-companion/tree/master/PositioningAndMaps) provides examples on how to access the device position and how to show a map (from Google Maps)
 
 * [**Compass**](https://github.com/nearchos/android-companion/tree/master/Compass) provides examples on how to interface with a native sensor such as the magnetometer
-
