@@ -51,12 +51,13 @@ The included projects are:
 
 * [**Volley**](https://github.com/nearchos/android-companion/tree/master/Volley) explains how to use the Volley library to enable high-level networking in Android
 
-### Part VI - Android Recipes
+### Part VI - Debugging and Testing
+
+* [**Testing**](https://github.com/nearchos/android-companion/tree/master/Testing) describes various methods to automate testing in Android development
+
+### Part VII - Android Recipes
 
 * [**PositioningAndMaps**](https://github.com/nearchos/android-companion/tree/master/PositioningAndMaps) provides examples on how to access the device position and how to show a map (from Google Maps)
 
 * [**Compass**](https://github.com/nearchos/android-companion/tree/master/Compass) provides examples on how to interface with a native sensor such as the magnetometer
 
-### Part VII - Testing
-
-* [**Testing**](https://github.com/nearchos/android-companion/tree/master/Testing) describes various methods to automate testing in Android development
