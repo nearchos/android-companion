@@ -1,4 +1,4 @@
-package io.github.nearchos.hellojava;
+package io.github.nearchos.lib;
 
 public class Circle implements Shape2D {
 
