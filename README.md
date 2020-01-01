@@ -56,6 +56,8 @@ The included projects are:
 
 ### Part VI - Debugging and Testing
 
+* [**Debugging**](https://github.com/nearchos/android-companion/tree/master/Debugging) describes the main methods for debugging, and Android Studio's support for it
+
 * [**Testing**](https://github.com/nearchos/android-companion/tree/master/Testing) describes various methods to automate testing in Android development
 
 ### Part VII - Android Recipes
