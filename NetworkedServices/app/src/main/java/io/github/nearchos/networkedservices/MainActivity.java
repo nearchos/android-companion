@@ -21,7 +21,7 @@ import java.net.URLEncoder;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "android-companion";
+    public static final String TAG = "mad-book";
 
     public static final String DEFAULT_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Madrid&destinations=Rome";
 

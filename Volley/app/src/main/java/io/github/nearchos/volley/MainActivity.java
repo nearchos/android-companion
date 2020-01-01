@@ -29,7 +29,7 @@ import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "android-companion";
+    public static final String TAG = "mad-book";
 
     private TextView textView;
     private ListView listView;

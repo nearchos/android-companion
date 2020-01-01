@@ -8,7 +8,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "android-companion-tag";
+    public static final String TAG = "mad-book";
 
     public void startActivity(View view) {
         Intent intent = new Intent(this, IntentsActivity.class);
