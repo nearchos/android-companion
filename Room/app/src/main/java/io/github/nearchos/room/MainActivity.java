@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        List<Entry> allEntries = BlogRoomDatabase
+        final List<Entry> allEntries = BlogRoomDatabase
                 .getDatabase(this)
                 .blogDao()
                 .getAllEntries();

@@ -18,7 +18,7 @@ import io.github.nearchos.coffeelovers.model.Order;
  */
 public class DbOpenHelper extends SQLiteOpenHelper {
 
-    public static final String TAG = "coffee-lovers";
+    public static final String TAG = "mad-book";
 
     public static final String DB_NAME = "coffee_lovers.db";
     public static final int VERSION = 1;
