@@ -1,4 +1,4 @@
-package io.github.nearchos.archcomp.github_api;
+package io.github.nearchos.archcomp;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -17,7 +17,7 @@ public class GithubFollower {
     private String login;
     @SerializedName("avatar_url") private String avatarUrl;
     @SerializedName("repos_url") private String reposUrl;
-    @SerializedName("repos_url") private boolean siteAdmin;
+    @SerializedName("site_admin") private boolean siteAdmin;
 
     public GithubFollower(long id, String login, String avatarUrl, String reposUrl, boolean siteAdmin) {
         this.id = id;

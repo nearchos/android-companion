@@ -12,8 +12,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import io.github.nearchos.archcomp.github_api.GithubFollower;
-
 import static io.github.nearchos.archcomp.MainActivity.TAG;
 
 /**

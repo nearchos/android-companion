@@ -1,4 +1,4 @@
-package io.github.nearchos.archcomp.github_api;
+package io.github.nearchos.archcomp;
 
 import android.app.Application;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @author Nearchos
  * Created: 16-Jun-20
  */
-class GithubFollowersViewModel extends AndroidViewModel {
+public class GithubFollowersViewModel extends AndroidViewModel {
 
     private final GithubFollowersRepository githubFollowersRepository;
     private final LiveData<List<GithubFollower>> liveData;
@@ -24,9 +24,5 @@ class GithubFollowersViewModel extends AndroidViewModel {
 
     LiveData<List<GithubFollower>> getLiveData() {
         return liveData;
-    }
-
-    public void insert(final GithubFollower githubFollower) {
-        githubFollowersRepository.insert(githubFollower);
     }
 }

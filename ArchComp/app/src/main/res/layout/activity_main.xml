@@ -5,25 +5,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/buttonPower"
-        android:onClick="startPowerActivity"
-        android:text="@string/Power_monitor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imageViewConnected"
+        android:src="@drawable/ic_wifi"
+        android:contentDescription="@string/Internet_Connection_Monitor"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintEnd_toStartOf="@id/textViewConnected"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewConnected"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:text="@string/Connected"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewConnected"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/viewTopHorizontalLine"
+        android:background="#000"
+        app:layout_constraintTop_toBottomOf="@id/textViewConnected"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
     <Button
-        android:id="@+id/buttonGithubFollowers"
-        android:text="@string/Github_followers"
-        android:onClick="startGithubFollowersActivity"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonRefresh"
+        android:text="@string/Refresh"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/buttonPower"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewUpdated"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/Updated"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonRefresh"
+        app:layout_constraintBaseline_toBaselineOf="@id/buttonRefresh"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <View
+        android:id="@+id/viewBottomHorizontalLine"
+        android:background="#000"
+        app:layout_constraintBottom_toTopOf="@id/textViewUpdated"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewGithubFollowers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/viewBottomHorizontalLine"
+        app:layout_constraintTop_toBottomOf="@id/viewTopHorizontalLine" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

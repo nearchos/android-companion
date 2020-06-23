@@ -1,4 +1,4 @@
-package io.github.nearchos.archcomp.github_api;
+package io.github.nearchos.archcomp;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-
-import io.github.nearchos.archcomp.R;
 
 /**
  * @author Nearchos

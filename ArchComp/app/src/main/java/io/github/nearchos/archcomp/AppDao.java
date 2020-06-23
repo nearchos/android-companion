@@ -8,8 +8,6 @@ import androidx.room.Query;
 
 import java.util.List;
 
-import io.github.nearchos.archcomp.github_api.GithubFollower;
-
 /**
  * @author Nearchos
  * Created: 14-Jan-20

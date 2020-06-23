@@ -1,13 +1,9 @@
 <resources>
     <string name="app_name">ArchComp</string>
-    <string name="Power_connected">Power connected</string>
-    <string name="Power_disconnected">Power disconnected</string>
-    <string name="Battery_level">Battery level %1d%%</string>
-    <string name="Iss_position">Iss Position</string>
-    <string name="Iss_latest_positions">Iss Latest Positions</string>
     <string name="Github_followers">Github followers</string>
-    <string name="Power_monitor">Power Monitor</string>
-    <string name="Auto_polling">Auto polling</string>
-    <string name="Poll_now">Poll now</string>
-    <string name="Clear">Clear</string>
+    <string name="Internet_Connection_Monitor">Internet Connection Monitor</string>
+    <string name="Connected">Connected</string>
+    <string name="No_connection">No connection</string>
+    <string name="Updated">Updated: %1$s</string>
+    <string name="Refresh">Refresh</string>
 </resources>

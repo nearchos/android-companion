@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="io.github.nearchos.archcomp">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,10 +22,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".github_api.GithubFollowersActivity" />
-<!--        <activity android:name=".latest_iss_positions.IssLatestPositionsActivity" />-->
-        <activity android:name=".power.PowerActivity" />
-<!--        <activity android:name=".iss_position.IssPositionActivity" />-->
     </application>
 
 </manifest>

@@ -1,37 +1,115 @@
 package io.github.nearchos.archcomp;
 
-import android.content.Intent;
+import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkRequest;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import io.github.nearchos.archcomp.github_api.GithubFollowersActivity;
-import io.github.nearchos.archcomp.power.PowerActivity;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import static io.github.nearchos.archcomp.GithubFollowersRepository.PREF_KEY_LAST_REQUEST_TIMESTAMP;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "mad-book";
 
+    private ImageView imageViewConnected;
+    private TextView textViewConnected;
+    private RecyclerView recyclerViewGithubFollowers;
+    private TextView textViewUpdated;
+    private Button buttonRefresh;
+
+    private static final SimpleDateFormat DEFAULT_SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+    private ConnectivityManager connectivityManager;
+    private NetworkStatusViewModel networkStatusViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.imageViewConnected = findViewById(R.id.imageViewConnected);
+        this.textViewConnected = findViewById(R.id.textViewConnected);
+        this.recyclerViewGithubFollowers = findViewById(R.id.recyclerViewGithubFollowers);
+        this.textViewUpdated = findViewById(R.id.textViewUpdated);
+        this.buttonRefresh = findViewById(R.id.buttonRefresh);
+
+        this.connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        this.networkStatusViewModel = new ViewModelProvider(this).get(NetworkStatusViewModel.class);
+
+        this.networkStatusViewModel.getConnected().observe(this, isConnected -> {
+            this.imageViewConnected.setImageResource(isConnected ? R.drawable.ic_wifi : R.drawable.ic_wifi_off);
+            this.textViewConnected.setText(isConnected ? R.string.Connected : R.string.No_connection);
+        });
+
+        final GithubFollowerListAdapter githubFollowerListAdapter = new GithubFollowerListAdapter(this);
+        recyclerViewGithubFollowers.setAdapter(githubFollowerListAdapter);
+        recyclerViewGithubFollowers.setLayoutManager(new LinearLayoutManager(this));
+
+        final SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        final GithubFollowersViewModel githubFollowersViewModel = new ViewModelProvider(this).get(GithubFollowersViewModel.class);
+        githubFollowersViewModel.getLiveData().observe(this, (githubFollowers) -> {
+            githubFollowerListAdapter.setGithubFollowers(githubFollowers);
+            final long lastRequestTimestamp = sharedPreferences.getLong(PREF_KEY_LAST_REQUEST_TIMESTAMP, 0L);
+            final String lastUpdated = DEFAULT_SIMPLE_DATE_FORMAT.format(new Date(lastRequestTimestamp));
+            this.textViewUpdated.setText(getString(R.string.Updated, lastUpdated));
+        });
+
+        this.buttonRefresh.setOnClickListener(v -> refresh());
     }
 
-    public void startPowerActivity(final View view) {
-        startActivity(new Intent(this, PowerActivity.class));
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerNetworkCallback();
     }
 
-//    public void startIssPositionActivity(final View view) {
-//        startActivity(new Intent(this, IssPositionActivity.class));
-//    }
-//
-//    public void startIssLatestPositionsActivity(final View view) {
-//        startActivity(new Intent(this, IssLatestPositionsActivity.class));
-//    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterNetworkCallback();
+    }
 
-    public void startGithubFollowersActivity(final View view) {
-        startActivity(new Intent(this, GithubFollowersActivity.class));
+    private void registerNetworkCallback() {
+        if(connectivityManager == null) return; // skip if connectivity manager is null
+        final NetworkRequest.Builder builder = new NetworkRequest.Builder();
+        connectivityManager.registerNetworkCallback(builder.build(), networkCallback);
+    }
+
+    private void unregisterNetworkCallback() {
+        connectivityManager.unregisterNetworkCallback(networkCallback);
+    }
+
+    private ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() {
+        @Override
+        public void onAvailable(@NonNull Network network) {
+            super.onAvailable(network);
+            networkStatusViewModel.setConnected(true);
+        }
+
+        @Override
+        public void onLost(@NonNull Network network) {
+            super.onLost(network);
+            networkStatusViewModel.setConnected(false);
+        }
+    };
+
+    private void refresh() {
+        GithubFollowersRepository githubFollowersRepository = new GithubFollowersRepository(getApplication());
+        githubFollowersRepository.refresh();
     }
 }
