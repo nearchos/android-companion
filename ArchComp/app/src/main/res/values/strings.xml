@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ArchComp</string>
+    <string name="Github_followers">Github followers</string>
+    <string name="Internet_Connection_Monitor">Internet Connection Monitor</string>
+    <string name="Connected">Connected</string>
+    <string name="No_connection">No connection</string>
+    <string name="Updated">Updated: %1$s</string>
+    <string name="Refresh">Refresh</string>
 </resources>
