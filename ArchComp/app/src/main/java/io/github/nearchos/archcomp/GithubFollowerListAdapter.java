@@ -40,6 +40,19 @@ class GithubFollowerListAdapter extends RecyclerView.Adapter<GithubFollowerListA
             // Covers the case of data not being ready yet.
             holder.githubItemView.setText("...");
         }
+        holder.githubItemView.setOnClickListener(v -> GithubFollowerListAdapter.this.handleClick(position));
+    }
+
+    private OnGithubFollowerSelected onGithubFollowerSelected = null;
+
+    public void setOnGithubFollowerSelected(OnGithubFollowerSelected onGithubFollowerSelected) {
+        this.onGithubFollowerSelected = onGithubFollowerSelected;
+    }
+
+    private void handleClick(final int position) {
+        if(onGithubFollowerSelected != null) {
+            onGithubFollowerSelected.githubFollowerSelected(position, githubFollowers.get(position));
+        }
     }
 
     void setGithubFollowers(List<GithubFollower> githubFollowers){

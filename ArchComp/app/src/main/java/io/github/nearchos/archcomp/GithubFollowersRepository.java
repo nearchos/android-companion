@@ -18,10 +18,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import io.github.nearchos.archcomp.AppDao;
-import io.github.nearchos.archcomp.AppDatabase;
-import io.github.nearchos.archcomp.GithubFollower;
-
 import static io.github.nearchos.archcomp.MainActivity.TAG;
 
 /**

@@ -6,4 +6,5 @@
     <string name="No_connection">No connection</string>
     <string name="Updated">Updated: %1$s</string>
     <string name="Refresh">Refresh</string>
+    <string name="Dismiss">Dismiss</string>
 </resources>

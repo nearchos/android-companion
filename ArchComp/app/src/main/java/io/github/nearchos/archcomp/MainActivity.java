@@ -3,6 +3,7 @@ package io.github.nearchos.archcomp;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final GithubFollowerListAdapter githubFollowerListAdapter = new GithubFollowerListAdapter(this);
+        githubFollowerListAdapter.setOnGithubFollowerSelected((position, githubFollower) -> showGithubFollower(githubFollower));
         recyclerViewGithubFollowers.setAdapter(githubFollowerListAdapter);
         recyclerViewGithubFollowers.setLayoutManager(new LinearLayoutManager(this));
 
@@ -111,5 +115,20 @@ public class MainActivity extends AppCompatActivity {
     private void refresh() {
         GithubFollowersRepository githubFollowersRepository = new GithubFollowersRepository(getApplication());
         githubFollowersRepository.refresh();
+    }
+
+    private void showGithubFollower(final GithubFollower githubFollower) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final ImageView imageView = new ImageView(this);
+        Picasso.get() // Picasso is a popular library for loading and caching images in Android (https://github.com/square/picasso)
+                .load(githubFollower.getAvatarUrl())
+                .placeholder(R.drawable.ic_baseline_sync_24)
+                .error(R.drawable.ic_baseline_sync_problem_24)
+                .into(imageView);
+        builder
+                .setTitle(githubFollower.getLogin())
+                .setView(imageView)
+                .setPositiveButton(R.string.Dismiss, null)
+                .show();
     }
 }
