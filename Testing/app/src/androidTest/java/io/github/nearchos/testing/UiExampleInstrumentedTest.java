@@ -1,6 +1,7 @@
 package io.github.nearchos.testing;
 
 import androidx.test.filters.LargeTest;
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
@@ -40,7 +41,7 @@ import static org.hamcrest.CoreMatchers.startsWith;
  * @see <a href="https://github.com/googlesamples/android-testing">Examples using Espresso for UI testing</a>
  */
 @LargeTest
-@RunWith(AndroidJUnit4.class)
+@RunWith(AndroidJUnit4ClassRunner.class)
 public class UiExampleInstrumentedTest {
 
     private String textToBeTyped;
