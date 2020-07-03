@@ -11,10 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-/**
- * @author Nearchos
- * Created: 16-Jun-20
- */
 class GithubFollowerListAdapter extends RecyclerView.Adapter<GithubFollowerListAdapter.GithubFollowerViewHolder> {
 
     private final LayoutInflater inflater;

@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import static io.github.nearchos.archcomp.GithubFollowersRepository.PREF_KEY_LAST_REQUEST_TIMESTAMP;
+import static io.github.nearchos.archcomp.AppRepository.PREF_KEY_LAST_REQUEST_TIMESTAMP;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,28 +73,23 @@ public class MainActivity extends AppCompatActivity {
             this.textViewUpdated.setText(getString(R.string.Updated, lastUpdated));
         });
 
-        this.buttonRefresh.setOnClickListener(v -> refresh());
+        final AppRepository appRepository = new AppRepository(getApplication());
+        this.buttonRefresh.setOnClickListener(v -> appRepository.refresh());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        registerNetworkCallback();
+        // registerNetworkCallback
+        if(connectivityManager == null) return; // skip if null
+        final NetworkRequest.Builder builder = new NetworkRequest.Builder();
+        connectivityManager.registerNetworkCallback(builder.build(), networkCallback); // requires permission ACCESS_NETWORK_STATE
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterNetworkCallback();
-    }
-
-    private void registerNetworkCallback() {
-        if(connectivityManager == null) return; // skip if connectivity manager is null
-        final NetworkRequest.Builder builder = new NetworkRequest.Builder();
-        connectivityManager.registerNetworkCallback(builder.build(), networkCallback);
-    }
-
-    private void unregisterNetworkCallback() {
+        // unregisterNetworkCallback
         connectivityManager.unregisterNetworkCallback(networkCallback);
     }
 
@@ -112,11 +107,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private void refresh() {
-        GithubFollowersRepository githubFollowersRepository = new GithubFollowersRepository(getApplication());
-        githubFollowersRepository.refresh();
-    }
-
     private void showGithubFollower(final GithubFollower githubFollower) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final ImageView imageView = new ImageView(this);
@@ -125,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
                 .placeholder(R.drawable.ic_baseline_sync_24)
                 .error(R.drawable.ic_baseline_sync_problem_24)
                 .into(imageView);
-        builder
-                .setTitle(githubFollower.getLogin())
+
+        builder.setTitle(githubFollower.getLogin())
                 .setView(imageView)
                 .setPositiveButton(R.string.Dismiss, null)
                 .show();

@@ -20,41 +20,32 @@ import java.util.concurrent.Executors;
 
 import static io.github.nearchos.archcomp.MainActivity.TAG;
 
-/**
- * @author Nearchos
- * Created: 16-Jun-20
- */
-class GithubFollowersRepository {
+class AppRepository {
 
     private AppDao appDao;
-    private LiveData<List<GithubFollower>> githubFollowersLiveData;
     private SharedPreferences sharedPreferences;
-    private RequestQueue queue;
     private Gson gson = new Gson();
     private Executor executor = Executors.newSingleThreadExecutor();
+    private RequestQueue queue;
 
-    public GithubFollowersRepository(final Application application) {
+    public AppRepository(final Application application) {
         final AppDatabase appDatabase = AppDatabase.getDatabase(application);
         this.appDao = appDatabase.appDao();
-        this.githubFollowersLiveData = appDao.getFollowers();
         this.sharedPreferences = application.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         this.queue = Volley.newRequestQueue(application);
-    }
 
-    public static final long TEN_MINUTES = 10L * 60 * 1000; // 10 min * 60 sec * 1000 ms
-    public static final String PREF_KEY_LAST_REQUEST_TIMESTAMP = "lastRequestTimestamp";
-
-    public static final String GITHUB_URL = "https://api.github.com/users/octocat/followers";
-
-    public LiveData<List<GithubFollower>> getGithubFollowersLiveData() {
         // if needed, make a request to online data source -- assume this is not needed if less than 10 min since last request
         final long lastRequestTimestamp = sharedPreferences.getLong(PREF_KEY_LAST_REQUEST_TIMESTAMP, 0L);
         final boolean onlineRequestNeeded = System.currentTimeMillis() - lastRequestTimestamp > TEN_MINUTES;
         if(onlineRequestNeeded) {
             refresh();
         }
-        return githubFollowersLiveData;
     }
+
+    public static final long TEN_MINUTES = 10L * 60 * 1000; // 10 min * 60 sec * 1000 ms
+    public static final String PREF_KEY_LAST_REQUEST_TIMESTAMP = "lastRequestTimestamp";
+
+    public static final String GITHUB_URL = "https://api.github.com/users/octocat/followers";
 
     void refresh() { // force a query to remote service to fetch data
         final StringRequest stringRequest = new StringRequest(

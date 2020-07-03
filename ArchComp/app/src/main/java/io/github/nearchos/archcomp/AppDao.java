@@ -8,10 +8,6 @@ import androidx.room.Query;
 
 import java.util.List;
 
-/**
- * @author Nearchos
- * Created: 14-Jan-20
- */
 @Dao
 public interface AppDao {
 

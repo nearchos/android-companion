@@ -1,15 +1,10 @@
 package io.github.nearchos.archcomp;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * @author Nearchos
- * Created: 14-Jun-20
- */
 @Entity(tableName = "github_followers")
 public class GithubFollower {
 
@@ -45,17 +40,5 @@ public class GithubFollower {
 
     public boolean isSiteAdmin() {
         return siteAdmin;
-    }
-
-    @Override
-    @NonNull
-    public String toString() {
-        return "FollowersResponse{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", avatarUrl='" + avatarUrl + '\'' +
-                ", reposUrl='" + reposUrl + '\'' +
-                ", siteAdmin=" + siteAdmin +
-                '}';
     }
 }
