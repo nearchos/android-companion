@@ -17,8 +17,6 @@ public class PowerReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent batteryStatusIntent) {
 
-        Log.d(MainActivity.TAG, "battery -> " + batteryStatusIntent); // todo delete
-
         // Are we charging / charged?
         int status = batteryStatusIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
         boolean isPowerConnected = status == BatteryManager.BATTERY_STATUS_CHARGING ||

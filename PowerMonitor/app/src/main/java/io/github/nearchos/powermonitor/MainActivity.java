@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,8 +13,6 @@ import static android.content.Intent.ACTION_POWER_CONNECTED;
 import static android.content.Intent.ACTION_POWER_DISCONNECTED;
 
 public class MainActivity extends AppCompatActivity {
-
-    public static final String TAG = "mad-book";
 
     private ImageView imageViewPowerConnected;
     private TextView textViewPowerConnected;
@@ -50,13 +47,11 @@ public class MainActivity extends AppCompatActivity {
         intentFilter.addAction(ACTION_POWER_DISCONNECTED);
         intentFilter.addAction(ACTION_BATTERY_CHANGED);
         registerReceiver(powerReceiver, intentFilter);
-        Log.d(MainActivity.TAG, "Registered receiver!");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         unregisterReceiver(powerReceiver);
-        Log.d(MainActivity.TAG, "Unregistered receiver!");
     }
 }

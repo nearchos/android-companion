@@ -2,10 +2,6 @@ package io.github.nearchos.powermonitor;
 
 import java.io.Serializable;
 
-/**
- * @author Nearchos
- * Created: 15-Jun-20
- */
 public class PowerInfo implements Serializable {
 
     private boolean powerConnected;
