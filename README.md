@@ -10,7 +10,7 @@ The included projects are:
 
 ### Part I - Object Orientation with Java
 
-* [**HelloJava**](https://github.com/nearchos/android-companion/tree/master/HelloJava) provides a brief review of Object Oriented programming with Java
+* [**HelloJava**](https://github.com/nearchos/android-companion/tree/master/HelloJava) provides a brief introduction to Object Oriented programming with Java
 
 * [**FingerChase**](https://github.com/nearchos/android-companion/tree/master/FingerChase) describes a custom-defined `View` which demonstrates inheritance, custom drawing, background threads and handling of touch events
 
