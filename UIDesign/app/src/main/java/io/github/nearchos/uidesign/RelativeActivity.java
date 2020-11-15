@@ -1,9 +1,6 @@
 package io.github.nearchos.uidesign;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 

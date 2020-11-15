@@ -16,6 +16,7 @@
 
     <EditText
         android:id="@+id/celsiusEditText"
+        android:hint="Enter signed number, e.g. -32"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberSigned" />
