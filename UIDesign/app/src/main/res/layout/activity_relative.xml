@@ -9,6 +9,7 @@
     <ImageView
         android:id="@+id/profileImageView"
         android:src="@mipmap/ic_launcher"
+        android:contentDescription="@string/app_name"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
