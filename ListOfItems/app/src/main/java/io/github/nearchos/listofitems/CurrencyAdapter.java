@@ -40,13 +40,8 @@ public class CurrencyAdapter extends ArrayAdapter<Currency> {
         nameTextView.setText(currency.getName());
 
         // we can even set a listener to any of the UI elements
-        favoriteCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton button, boolean isChecked) {
-                Toast.makeText(getContext(), currency.getCode() + ": " + isChecked,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+        favoriteCheckBox.setOnCheckedChangeListener((button, isChecked) ->
+                Toast.makeText(getContext(), currency.getCode() + ": " + isChecked, Toast.LENGTH_SHORT).show());
 
         return view;
     }
