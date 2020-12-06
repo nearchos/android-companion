@@ -1,20 +1,23 @@
 package io.github.nearchos.recyclerview;
 
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Locale;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity implements NumberAdapter.OnItemClickListener, NumberAdapter.OnItemLongClickListener {
 
     public static final int SIZE_OF_DATA = 100;
-    private Vector<Double> data = new Vector<>();
+    private final Vector<Double> data = new Vector<>();
 
     private RecyclerView recyclerView;
     private NumberAdapter adapter;
@@ -50,14 +53,14 @@ public class MainActivity extends AppCompatActivity implements NumberAdapter.OnI
 
     @Override
     public void itemClicked(int pos, double value) {
-        Snackbar.make(recyclerView, data.get(pos) + " (long press to delete)", Snackbar.LENGTH_SHORT)
+        Snackbar.make(recyclerView, String.format(Locale.ENGLISH, "%.1f (long press to delete)", data.get(pos)), Snackbar.LENGTH_SHORT)
                 .show();
     }
 
     @Override
     public boolean itemLongClicked(int pos, double value) {
         data.remove(pos);
-        Snackbar.make(recyclerView, "Deleted " + value, 5000) // show for 5 seconds
+        Snackbar.make(recyclerView, "Deleted " + String.format(Locale.ENGLISH, "%.1f", value), 5000) // show for 5 seconds
                 .setAction("Undo", view -> undo(pos, value))
                 .show();
         adapter.notifyDataSetChanged();
