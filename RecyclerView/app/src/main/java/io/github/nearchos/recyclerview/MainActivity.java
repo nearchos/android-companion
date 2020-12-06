@@ -14,9 +14,12 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Locale;
 import java.util.Vector;
 
-public class MainActivity extends AppCompatActivity implements NumberAdapter.OnItemClickListener, NumberAdapter.OnItemLongClickListener {
+public class MainActivity
+        extends AppCompatActivity
+        implements NumberAdapter.OnItemClickListener, NumberAdapter.OnItemLongClickListener {
 
-    public static final int SIZE_OF_DATA = 100;
+    public static final int SIZE_OF_DATA = 10;
+    public static final int SIZE_OF_INCREMENT = 4;
     private final Vector<Double> data = new Vector<>();
 
     private RecyclerView recyclerView;
@@ -74,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements NumberAdapter.OnI
 
     /**
      * Modify existing data by adding 0.1 to each value
-     * @param view
      */
     public void modify(final View view) {
         Log.d("android-companion", "modify");
@@ -85,33 +87,30 @@ public class MainActivity extends AppCompatActivity implements NumberAdapter.OnI
     }
 
     /**
-     * Add another 10 values at the end of the existing data
-     * @param view
+     * Add values at the end of the existing data
      */
     public void append(final View view) {
         Log.d("android-companion", "append");
-        // 'remember' the first visible item position
         final double lastValue = this.data.lastElement();
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < SIZE_OF_INCREMENT; i++) {
             this.data.add(lastValue + i + 1);
         }
         adapter.notifyDataSetChanged();
     }
 
     /**
-     * Add another 10 values at the start of the existing data
-     * @param view
+     * Add values at the start of the existing data
      */
     public void prepend(final View view) {
         Log.d("android-companion", "prepend");
         final int lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition();
         final double firstValue = this.data.firstElement();
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < SIZE_OF_INCREMENT; i++) {
             this.data.add(0, firstValue - i - 1);
         }
         adapter.notifyDataSetChanged();
         // scroll to ensure that the same item is still the first one visible
-        linearLayoutManager.scrollToPosition(lastVisibleItemPosition+10);
+        linearLayoutManager.scrollToPosition(lastVisibleItemPosition + SIZE_OF_INCREMENT - 1);
         Log.d("android-companion", "lastVisibleItemPosition:" + lastVisibleItemPosition);
     }
 }

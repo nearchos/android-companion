@@ -1,9 +1,11 @@
 package io.github.nearchos.recyclerview;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Locale;
@@ -21,15 +23,15 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView textView;
-        public ViewHolder(TextView textView) {
-            super(textView);
-            this.textView = textView;
+        public ViewHolder(View View) {
+            super(View);
+            this.textView = itemView.findViewById(R.id.textView);
         }
     }
 
-    private Vector<Double> data;
-    private OnItemClickListener onItemClickListener;
-    private OnItemLongClickListener onItemLongClickListener;
+    private final Vector<Double> data;
+    private final OnItemClickListener onItemClickListener;
+    private final OnItemLongClickListener onItemLongClickListener;
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public NumberAdapter(final Vector<Double> data, OnItemClickListener onItemClickListener, OnItemLongClickListener onItemLongClickListener) {
@@ -39,14 +41,15 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberAdapter.ViewHolder
     }
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
     public NumberAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        TextView textView = (TextView) LayoutInflater
+        final View view = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.number_view, parent, false);
+                .inflate(R.layout.item_view, parent, false);
 
-        final ViewHolder viewHolder = new ViewHolder(textView);
+        final ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 

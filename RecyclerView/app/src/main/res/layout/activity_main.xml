@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -15,21 +14,21 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:text="Prepend"
+            android:text="@string/Prepend"
             android:onClick="prepend"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
 
         <Button
-            android:text="Modify"
+            android:text="@string/Modify"
             android:onClick="modify"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
 
         <Button
-            android:text="Append"
+            android:text="@string/Append"
             android:onClick="append"
             android:layout_width="0dp"
             android:layout_weight="1"
