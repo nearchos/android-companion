@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SmartHomeSwitch</string>
+    <string name="Living_Room">Living Room</string>
+    <string name="Kitchen">Kitchen</string>
+    <string name="Bedroom">Bedroom</string>
+    <string name="Garage">Garage</string>
+</resources>
