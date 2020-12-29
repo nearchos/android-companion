@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">JustChat</string>
+    <string name="Choose_your_alias">Choose your alias</string>
+    <string name="Connect">Connect</string>
+    <string name="The_alias_cannot_be_empty">The alias cannot be empty</string>
+    <string name="Send">Send</string>
+</resources>
