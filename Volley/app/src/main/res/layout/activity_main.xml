@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:text="Last fetched"
-        android:textSize="24sp"
+        android:text="@string/Last_fetched"
+        android:textSize="20sp"
         android:padding="16dp"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
     <Button
         android:id="@+id/button"
         android:onClick="fetch"
-        android:text="Fetch"
+        android:text="@string/Fetch"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

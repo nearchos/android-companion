@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Volley</string>
+    <string name="Last_fetched">Last fetched</string>
+    <string name="Fetch">Fetch</string>
 </resources>

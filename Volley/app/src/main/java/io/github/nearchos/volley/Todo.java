@@ -1,14 +1,11 @@
 package io.github.nearchos.volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class Todo {
 
-    private int userId;
-    private int id;
-    private String title;
-    private boolean completed;
+    private final int userId;
+    private final int id;
+    private final String title;
+    private final boolean completed;
 
     public Todo(int userId, int id, String title, boolean completed) {
         this.userId = userId;
