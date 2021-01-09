@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020. Nearchos Paspallis
+  ~ This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 3.0 United
+  ~ States License, described at this URL: https://creativecommons.org/licenses/by-nc-nd/3.0/us/.
+  ~ Unless required by applicable law or agreed to in writing, code listed in this site is
+  ~ distributed on "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+  ~ implied.
+  -->
+
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@drawable/ic_launcher_background" />
     <foreground android:drawable="@drawable/ic_launcher_foreground" />
