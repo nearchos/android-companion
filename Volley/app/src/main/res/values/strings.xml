@@ -2,4 +2,8 @@
     <string name="app_name">Volley</string>
     <string name="Last_fetched">Last fetched</string>
     <string name="Fetch">Fetch</string>
+    <string name="thumbnail">thumbnail</string>
+    <string name="Todo_list">Todo list</string>
+    <string name="Photo_list">Photo list</string>
+    <string name="Go">Go</string>
 </resources>
