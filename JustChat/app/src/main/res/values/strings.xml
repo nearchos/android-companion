@@ -4,4 +4,5 @@
     <string name="Connect">Connect</string>
     <string name="The_alias_cannot_be_empty">The alias cannot be empty</string>
     <string name="Send">Send</string>
+    <string name="Type_your_message_here">Type your message here</string>
 </resources>

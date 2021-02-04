@@ -24,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void connect() {
-        final String alias = editText.getText().toString();
-        if(alias.trim().isEmpty()) {
+        final String userAlias = editText.getText().toString();
+        if(userAlias.trim().isEmpty()) {
             Snackbar.make(editText, R.string.The_alias_cannot_be_empty, BaseTransientBottomBar.LENGTH_SHORT).show();
         } else {
             final Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("alias", alias);
+            intent.putExtra("alias", userAlias);
             startActivity(intent);
         }
     }
