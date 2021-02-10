@@ -12,13 +12,14 @@
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/Choose_your_alias"
         android:autofillHints="@string/Choose_your_alias"
-        android:maxLines="1"
-        android:inputType="text"
         android:focusedByDefault="true"
+        android:hint="@string/Choose_your_alias"
+        android:inputType="text"
+        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
         android:id="@+id/textView"
