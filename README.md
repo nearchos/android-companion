@@ -67,3 +67,5 @@ The included projects are:
 * [**Compass**](https://github.com/nearchos/android-companion/tree/master/Compass) provides examples on how to interface with sensors in general and demonstrates an example which uses the magnetometer sensor to implement a compass
 
 * [**PowerMonitor**](https://github.com/nearchos/android-companion/tree/master/PowerMonitor) demonstrates the use of `ViewModel` and `Receiver` via a simple app for monitoring the battery
+
+* [**BarcodeScanner**](https://github.com/nearchos/android-companion/tree/master/BarcodeScanner) demonstrates the use of the `ZXing` library to easily embed a Barcode Scanner in your app
