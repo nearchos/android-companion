@@ -49,8 +49,7 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberAdapter.ViewHolder
                 .from(parent.getContext())
                 .inflate(R.layout.item_view, parent, false);
 
-        final ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
