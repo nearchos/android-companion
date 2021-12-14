@@ -8,6 +8,12 @@ public class Currency implements Serializable {
     private String name;
     private boolean favorite;
 
+    /**
+     * Immutable object.
+     * @param code
+     * @param name
+     * @param favorite
+     */
     public Currency(String code, String name, boolean favorite) {
         this.code = code;
         this.name = name;
