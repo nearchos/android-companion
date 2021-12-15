@@ -109,7 +109,7 @@ public class MainActivity
             this.data.add(0, firstValue - i - 1);
         }
         adapter.notifyDataSetChanged();
-        // scroll to ensure that the same item is still the first one visible
+        // scroll so that the same item is still the first one visible
         linearLayoutManager.scrollToPosition(lastVisibleItemPosition + SIZE_OF_INCREMENT - 1);
         Log.d("android-companion", "lastVisibleItemPosition:" + lastVisibleItemPosition);
     }

@@ -23,8 +23,8 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView textView;
-        public ViewHolder(View View) {
-            super(View);
+        public ViewHolder(View view) {
+            super(view);
             this.textView = itemView.findViewById(R.id.textView);
         }
     }
