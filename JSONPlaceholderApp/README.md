@@ -12,16 +12,16 @@ This app provides a detailed demo of an app with the following features:
 - Demonstrates how to use [Snackbar](https://developer.android.com/training/snackbar/showing) to display a message, including an `Undo` action
 
 All classes are properly commented to assist in understanding the code:
-- Model classes
--- [Album](app/src/main/java/com/aspectsense/jsonplaceholderapp/Album.java)
--- Photo
-- Room database classes
--- AppDao 
--- AppDatabase
-- UI classes
--- MainActivity: starting point, displays all the photos marked as favorite, initially empty
--- AlbumsActivity: uses a simple implementation of a ListView to display all available albums
--- PhotosActivity: uses a more elaborate implementation of RecyclerView to show a custom view for each photo, enabling marking them as favorite/not favorite
--- PhotosRecyclerAdapter: defines a custom implementation of an adapter for displaying the custom view of the photos, while realizing a listener interface for updating observers via callbacks
+* Model classes
+  * [Album](app/src/main/java/com/aspectsense/jsonplaceholderapp/Album.java)
+  * Photo
+* Room database classes
+  * AppDao
+  * AppDatabase
+* UI classes
+  * MainActivity: starting point, displays all the photos marked as favorite, initially empty
+  * AlbumsActivity: uses a simple implementation of a ListView to display all available albums
+  * PhotosActivity: uses a more elaborate implementation of RecyclerView to show a custom view for each photo, enabling marking them as favorite/not favorite
+  * PhotosRecyclerAdapter: defines a custom implementation of an adapter for displaying the custom view of the photos, while realizing a listener interface for updating observers via callbacks
 
 ![JSONPlaceholder App Screenshot](screenshot.png)
