@@ -7,9 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".PhotosActivity">
 
-    <ListView
-        android:id="@+id/photosListView"
+    <TextView
+        android:id="@+id/albumTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:background="#ff0"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Album: ABC" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444"
+        app:layout_constraintBottom_toBottomOf="@+id/albumTextView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/photosRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

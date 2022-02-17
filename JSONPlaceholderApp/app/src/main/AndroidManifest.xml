@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aspectsense.jsonplaceholderapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- This permission is required for your app to be allowed to connect to the Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,15 +13,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JSONPlaceholderApp">
 
+        <!-- The starting activity - shows the selected 'favorite' photos -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- Shows a list of albums to choose from -->
+        <activity
+            android:name=".AlbumsActivity"
+            android:exported="false" />
+
+        <!-- Shows a custom list of photos to mark as favorite or not favorite -->
         <activity
             android:name=".PhotosActivity"
             android:exported="false" />
