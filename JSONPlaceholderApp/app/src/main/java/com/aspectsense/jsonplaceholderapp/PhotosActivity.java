@@ -16,13 +16,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.Executors;
 
+/**
+ * Used to list the available Photos in a selected Album, and allow the user to mark them as
+ * favorite, or not favorite.
+ */
 public class PhotosActivity extends AppCompatActivity implements PhotosRecyclerAdapter.OnFavoriteChangedListener {
 
     // contains the photos to be listed - initially empty
