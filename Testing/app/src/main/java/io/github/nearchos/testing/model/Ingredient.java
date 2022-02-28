@@ -1,8 +1,9 @@
 package io.github.nearchos.testing.model;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
@@ -48,6 +49,7 @@ public class Ingredient implements Serializable {
      * Overloaded default method to create proper text-representation to be used in list adapter.
      * @return a string representation of the ingredient, via its name
      */
+    @NonNull
     @Override
     public String toString() {
         return name;

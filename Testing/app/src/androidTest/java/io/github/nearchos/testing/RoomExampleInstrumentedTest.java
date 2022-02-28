@@ -1,11 +1,11 @@
 package io.github.nearchos.testing;
 
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.Context;
 
-import androidx.test.InstrumentationRegistry;
 import androidx.test.filters.MediumTest;
-import androidx.test.runner.AndroidJUnit4;
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,7 +31,7 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @MediumTest
-@RunWith(AndroidJUnit4.class)
+@RunWith(AndroidJUnit4ClassRunner.class)
 public class RoomExampleInstrumentedTest {
 
     private static final double DELTA = 0.001d; // set the required precision to 1/1000th
@@ -45,7 +45,7 @@ public class RoomExampleInstrumentedTest {
 
     @Before
     public void init() {
-        Context context = InstrumentationRegistry.getTargetContext();
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         recipesDatabase = Room.inMemoryDatabaseBuilder(context, RecipesDatabase.class).build();
         recipesDao = recipesDatabase.recipesDao();
 

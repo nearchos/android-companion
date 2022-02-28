@@ -1,6 +1,6 @@
 package io.github.nearchos.testing;
 
-import android.arch.persistence.room.TypeConverter;
+import androidx.room.TypeConverter;
 
 import io.github.nearchos.testing.model.Category;
 import io.github.nearchos.testing.model.Unit;

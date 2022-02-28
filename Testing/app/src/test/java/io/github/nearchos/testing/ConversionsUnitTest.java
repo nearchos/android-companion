@@ -17,7 +17,7 @@ public class ConversionsUnitTest {
 
     @Test
     public void conversionLitersToMl() {
-        assertEquals( // 1 Liter = 4 cups ?
+        assertEquals( // 1.5 Liter = 1500 mL ?
                 Conversions.convert(Unit.L, Unit.ML, 1.5d),
                 1500,
                 DELTA);
